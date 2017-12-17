@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Charities</string>
+
+    <string name="error">An error has been occurred! Pleas try again!</string>
 </resources>

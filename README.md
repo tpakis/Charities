@@ -11,6 +11,11 @@
   - Μαζεμένες σε ένα Activity οι ευχές των χρηστών
   - Firebase βάση δεδομένων για τις πληροφορίες των ιδρυμάτω-οργανισμών και για τις ευχές
 
+### Contribution
+  - Δείτε στα Issues αν δεν έχει αναλάβει κάποιος αυτό που θέλετε. Στη περίπτωση που δεν υπάρχει δημιουργήστε issue και περιγράψτε αυτό που θέλετε να κάνετε.
+  - Όταν είστε έτοιμοι να ανεβάσετε το κώδικα στο pull request γράψτε και τον αριθμό του issue ώστε να το κλείσουμε.
+
+
 ### Χρήσιμα links
 * [Straggered Grid](https://www.youtube.com/watch?v=yYsO_h6I_Hw) 
 * [awesome-android-ui](https://github.com/wasabeef/awesome-android-ui)

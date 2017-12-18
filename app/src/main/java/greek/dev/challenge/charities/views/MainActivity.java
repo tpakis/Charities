@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    //here we get the results from the firebase db
                     Charity charity = dataSnapshot.getValue(Charity.class);
                     Log.d("mainform", "onChildAdded: "+charity.toString());
                     //mMessageAdapter.add(friendlyMessage);
@@ -86,8 +87,8 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         onSignedOutCleanup();
     }
+    //not signed out now, but a cleanup is required onPause, so not to get duplicate EventListeners
     private void onSignedOutCleanup(){
-     //   mMessageAdapter.clear();
         detachDatabaseReadListener();
 
     }

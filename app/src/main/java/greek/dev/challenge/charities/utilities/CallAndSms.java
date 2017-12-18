@@ -8,6 +8,14 @@ import android.net.Uri;
  * Class created to be able to handle calls and messaging.
  * Needs to be instantiated with a context before being used.
  * Should be called after call button is pressed or sms button is pressed.
+ * No permissions are needed since actions are sent directly to respective services.
+ *
+ * Ex.
+ * public void myMethod(View view) {
+        CallAndSms callAndSms = new CallAndSms(this);
+        callAndSms.call("2101234567");
+        callAndSms.sms("6941234567", "I love donating");
+    }
  */
 public class CallAndSms {
 
@@ -27,7 +35,7 @@ public class CallAndSms {
      * @param telephone the number which will be called
      *                  ex. Charity.getTelephone()
      */
-    public void call(int telephone){
+    public void call(String telephone){
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + telephone));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
@@ -38,9 +46,9 @@ public class CallAndSms {
     /**
      * Method for sending an sms message to charity.
      * @param smsNumber the number to which the sms will be sent
-     * @param message
+     * @param message the message which will be sent.
      */
-    public void sms(int smsNumber , String message){
+    public void sms(String smsNumber , String message){
 
         String smsMessage = " ";
         if(!message.isEmpty()){

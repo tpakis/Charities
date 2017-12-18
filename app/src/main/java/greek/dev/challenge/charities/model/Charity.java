@@ -2,7 +2,7 @@ package greek.dev.challenge.charities.model;
 
 public class Charity {
     /**
-     * unuque id of the charity isntitute
+     * unuque id of the charity institute
      */
     private int id;
     /**

@@ -12,8 +12,8 @@ import android.net.Uri;
  *
  * Ex.
  * public void myMethod() {
-     Intent callIntent = CallAndSms.call(this, 6981234567L);
-     Intent smsIntent = CallAndSms.sms(this, 6981234567L, "Best of luck ");
+     Intent callIntent = CallAndSms.call(this, "6981234567");
+     Intent smsIntent = CallAndSms.sms(this, "6981234567", "Best of luck ");
      startActivity(callIntent);
      startActivity(smsIntent);
  }
@@ -30,7 +30,7 @@ public final class CallAndSms {
      * @return Intent that will take the user to the phone app.
      *         ex. startActivity(CallAndSms.call(this, Charity.getTelephone() );
      */
-    public static Intent call(Context context, long telephone){
+    public static Intent call(Context context, String telephone){
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + telephone));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
@@ -49,7 +49,7 @@ public final class CallAndSms {
      * @param message the message which will be sent.
      *
      */
-    public static Intent sms(Context context, long smsNumber , String message){
+    public static Intent sms(Context context, String smsNumber , String message){
 
         String smsMessage = " ";
         if(!message.isEmpty()){

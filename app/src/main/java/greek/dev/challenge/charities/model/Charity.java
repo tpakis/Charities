@@ -17,7 +17,7 @@ public class Charity {
      * sms phone number to which the app will send the messages
      * If sms number is not provided then it should contain 0
      */
-    private int sms;
+    private String sms;
     /**
      * text containing info about the cost of the sms
      */
@@ -29,7 +29,7 @@ public class Charity {
     /**
      * phone number to which the app will make calls
      */
-    private int telephone;
+    private String telephone;
     /**
      * text containing info about the cost of the phone call.
      * If phone number is not provided then it should contain 0.
@@ -62,7 +62,7 @@ public class Charity {
      * @param iconlink link to the firebase storage resource containing the logo of the institution
      * @param imageurls comma seperated list of links to the firebase storage containing photos of the institute
      */
-    public Charity(int id, String name, String description, int sms, String smscost, String smstext, int telephone, String telephonecost, String iconlink, String imageurls) {
+    public Charity(int id, String name, String description, String sms, String smscost, String smstext, String telephone, String telephonecost, String iconlink, String imageurls) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -119,19 +119,19 @@ public class Charity {
         this.id = id;
     }
 
-    public int getSms() {
+    public String getSms() {
         return sms;
     }
 
-    public void setSms(int sms) {
+    public void setSms(String sms) {
         this.sms = sms;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 

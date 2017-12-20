@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="false"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/small_margin">
+
+        <RelativeLayout
+            android:id="@+id/detail_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow_border">
+
+            <RelativeLayout
+                android:id="@+id/detail_image_icon_layout"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginTop="@dimen/large_margin">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/detail_charity_icon"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/no_charity_icon_bg" />
+
+                <com.mikepenz.iconics.view.IconicsImageView
+                    android:id="@+id/detail_charity_default_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:iiv_color="@color/background"
+                    app:iiv_icon="gmd_card_giftcard" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/detail_charity_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_image_icon_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/large_margin"
+                android:fontFamily="@font/roboto"
+                android:text="Fake Charity Name"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/huge_font_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/detail_call_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_frame_layout"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:orientation="horizontal">
+
+            <com.mikepenz.iconics.view.IconicsButton
+                android:id="@+id/detail_button_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@android:color/white"
+                android:fontFamily="@font/roboto"
+                android:paddingRight="@dimen/small_margin"
+                android:text="@string/call"
+                android:textColor="@android:color/holo_green_light"
+                android:textSize="@dimen/medium_font_size"
+                app:iiv_start_color="@android:color/holo_green_light"
+                app:iiv_start_icon="gmd_call"
+                app:iiv_start_padding="@dimen/small_margin"
+                app:iiv_start_size="40dp" />
+
+            <TextView
+                android:id="@+id/detail_call_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/detail_button_call"
+                android:fontFamily="@font/roboto"
+                android:paddingLeft="@dimen/small_margin"
+                android:text="@string/call_cost"
+                android:textColor="@color/accent"
+                android:textSize="@dimen/tiny_font_size" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/detail_sms_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_call_layout"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <com.mikepenz.iconics.view.IconicsButton
+                android:id="@+id/detail_button_sms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@android:color/white"
+                android:fontFamily="@font/roboto"
+                android:paddingRight="@dimen/small_margin"
+                android:text="@string/sms"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="@dimen/medium_font_size"
+                app:iiv_start_color="@android:color/holo_orange_light"
+                app:iiv_start_icon="gmd_sms"
+                app:iiv_start_padding="@dimen/small_margin"
+                app:iiv_start_size="40dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/detail_button_sms"
+                android:fontFamily="@font/roboto"
+                android:paddingLeft="@dimen/small_margin"
+                android:text="@string/sms_cost"
+                android:textColor="@color/accent"
+                android:textSize="@dimen/tiny_font_size" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/detail_description_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_sms_layout"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/small_margin"
+            android:fontFamily="@font/roboto"
+            android:paddingTop="@dimen/medium_margin"
+            android:text="@string/desc"
+            android:textSize="@dimen/large_font_size" />
+
+        <View
+            android:id="@+id/detail_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/detail_description_title"
+            android:layout_marginBottom="@dimen/tiny_margin"
+            android:layout_marginTop="@dimen/tiny_margin"
+            android:background="@color/primary" />
+
+        <TextView
+            android:id="@+id/detail_desc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detail_divider"
+            android:fontFamily="@font/roboto"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            android:textSize="@dimen/small_font_size" />
+
+    </RelativeLayout>
+</ScrollView>

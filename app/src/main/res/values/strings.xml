@@ -2,4 +2,11 @@
     <string name="app_name">Charities</string>
 
     <string name="error">An error has been occurred! Pleas try again!</string>
+
+    <!-- Charity Detail XML -->
+    <string name="call">Make a call</string>
+    <string name="sms">Send an SMS</string>
+    <string name="call_cost">cost per call</string>
+    <string name="sms_cost">cost per sms</string>
+    <string name="desc">Description</string>
 </resources>

@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         //get reference to specific part of database - messages with mMessagesDatabaseReference
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseStorage = FirebaseStorage.getInstance();

@@ -1,5 +1,9 @@
 package greek.dev.challenge.charities.views;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.List;
+
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.model.Charity;
 
@@ -22,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mCharitiesPhotosStorageReference;
-
+    private MainViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
         mCharitiesDatabaseReference = mFirebaseDatabase.getReference().child("charities");
        // mCharitiesPhotosStorageReference = mFirebaseStorage.getReference().child("charities_photos");
+
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
+        viewModel.getCharitiesList().observe(MainActivity.this, new Observer<List<Charity>>() {
+            @Override
+            public void onChanged(@Nullable List<Charity> itemAndPeople) {
+                Log.v("main", itemAndPeople.get(itemAndPeople.size()-1).toString());
+                Log.v("main", String.valueOf(itemAndPeople.size()));
+            }
+        });
 
     }
     @Override
@@ -48,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     //here we get the results from the firebase db
                     Charity charity = dataSnapshot.getValue(Charity.class);
-                    Log.d("mainform", "onChildAdded: "+charity.toString());
-                    //mMessageAdapter.add(friendlyMessage);
+                    viewModel.addCharity(charity);
                 }
 
                 @Override

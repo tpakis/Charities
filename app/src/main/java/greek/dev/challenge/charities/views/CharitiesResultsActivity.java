@@ -52,8 +52,8 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
 
         // TODO THE CODE BELLOW IS FOR TESTING. has to be removed to implement it using the real data.
         // --------------------------------------------------------
-        Charity test1 = new Charity(1, "Charity Name 1", "lalala1", 5, "test", "test", 10, "10", "lala", "test");
-        Charity test2 = new Charity(2, "Charity Name 2", "lalala2", 6, "test2", "test2", 102, "102", "lal2a", "test2");
+        Charity test1 = new Charity(1, "Charity Name 1", "lalala1", "5", "test", "test", "10", "10", "lala", "test");
+        Charity test2 = new Charity(2, "Charity Name 2", "lalala2", "6", "test2", "test2", "102", "102", "lal2a", "test2");
 
         ArrayList<Charity> testing = new ArrayList<Charity>();
         testing.add(test1);

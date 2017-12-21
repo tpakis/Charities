@@ -15,18 +15,18 @@ import greek.dev.challenge.charities.R;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    public  String[] web = {
+    public String[] web = {//todo get that from string array
             "Κάνε Δωρεά",
             "Ιδρύματα",
             "Oι Ευχές σας",
             "Πολιτική Προστασίας",
-    } ;
+    };
 
     public Integer[] Imageid = {
-            R.drawable.donate,
-            R.drawable.organizations,
-            R.drawable.wishes,
-            R.drawable.privacy,
+            R.drawable.ic_donate,
+            R.drawable.ic_organizations,
+            R.drawable.ic_wishes,
+            R.drawable.ic_privacy,
     };
 
     public ImageAdapter(Context c )

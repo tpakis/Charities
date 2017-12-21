@@ -3,14 +3,11 @@ package greek.dev.challenge.charities.views;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-<<<<<<< HEAD
 import android.content.Intent;
 import android.widget.GridView;
 import android.widget.*;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
-=======
->>>>>>> tpakis/master
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -21,10 +18,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import greek.dev.challenge.charities.R;
-<<<<<<< HEAD
 import greek.dev.challenge.charities.adapters.ImageAdapter;
-=======
->>>>>>> tpakis/master
 import greek.dev.challenge.charities.model.Charity;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,15 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mCharitiesPhotosStorageReference;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> tpakis/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this));
 
@@ -58,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-=======
->>>>>>> tpakis/master
 
         //get reference to specific part of database - messages with mMessagesDatabaseReference
         mFirebaseDatabase = FirebaseDatabase.getInstance();

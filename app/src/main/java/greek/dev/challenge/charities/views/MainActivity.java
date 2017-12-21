@@ -1,12 +1,16 @@
 package greek.dev.challenge.charities.views;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.content.Intent;
-import android.widget.GridView;
-import android.widget.*;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.google.firebase.database.ChildEventListener;
@@ -16,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.List;
 
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.adapters.ImageAdapter;
@@ -28,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mCharitiesPhotosStorageReference;
-
+    private MainViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
                 if (position == 0) {
-                    Intent myIntent = new Intent(v.getContext(), GridItemActivity1.class);
+                    Intent myIntent = new Intent(v.getContext(), CharitiesResultsActivity.class);
                     startActivityForResult(myIntent, 0);
                 }
             }
@@ -54,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
 
         mCharitiesDatabaseReference = mFirebaseDatabase.getReference().child("charities");
        // mCharitiesPhotosStorageReference = mFirebaseStorage.getReference().child("charities_photos");
+
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
+        viewModel.getCharitiesList().observe(MainActivity.this, new Observer<List<Charity>>() {
+            @Override
+            public void onChanged(@Nullable List<Charity> charitiesList) {
+                Log.v("main", charitiesList.get(charitiesList.size()-1).toString());
+                Log.v("main", String.valueOf(charitiesList.size()));
+            }
+        });
 
     }
     @Override
@@ -68,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     //here we get the results from the firebase db
                     Charity charity = dataSnapshot.getValue(Charity.class);
-                    Log.d("mainform", "onChildAdded: "+charity.toString());
-                    //mMessageAdapter.add(friendlyMessage);
+                    viewModel.addCharity(charity);
                 }
 
                 @Override

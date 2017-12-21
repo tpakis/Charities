@@ -3,7 +3,11 @@
     android:id="@+id/android_gridview_example"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:orientation="vertical">
+=======
+    tools:context="greek.dev.challenge.charities.views.MainActivity">
+>>>>>>> tpakis/master
 
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"

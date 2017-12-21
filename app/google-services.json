@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1035944994023",
+    "firebase_url": "https://greek-charities.firebaseio.com",
+    "project_id": "greek-charities",
+    "storage_bucket": "greek-charities.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035944994023:android:b1c6bc1482e49035",
+        "android_client_info": {
+          "package_name": "greek.dev.challenge.charities"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035944994023-s5vk1hlguod25s54ios1aga5411d5kpi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZpiM3Ib_B2Ul-YsyL2-ThcRmYFFP4QJQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 package greek.dev.challenge.charities.adapters;
 
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +30,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
     public ResultsAdapter(CharitiesResultsAdapterOnClickHandler handler) {
         mClickHandler = handler;
     }
+
 
     public class ResultsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -76,10 +79,9 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
         holder.tv_charity_name.setText(charityObject.getName());
         holder.tv_charity_info.setText(charityObject.getDescription());
 
-        /* NOTE. if the charity's image is available, then we should use:
+         /* NOTE. if the charity's image is available, then we should use:
             holder.iv_charity_default_icon.setVisibility(View.INVISIBLE);
             holder.iv_charity_icon.setImageResource(); (or a similar method to set the source)
-
             but if the charity's image in not available, then we should use:
             holder.iv_charity_default_icon.setVisibility(View.VISIBLE);
             holder.iv_charity_icon.setImageResource(R.drawable.no_charity_icon_bg);  */
@@ -100,4 +102,5 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
         this.charitiesResults = charitiesResults;
         notifyDataSetChanged();
     }
+
 }

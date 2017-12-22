@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -93,6 +95,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
                 mCharitiesAdapter.setSeriesResults(charitiesList);
                 Log.v("main", charitiesList.get(charitiesList.size()-1).toString());
                 Log.v("main", String.valueOf(charitiesList.size()));
+                runLayoutAnimation(rv_charities);
             }
         });
 
@@ -188,5 +191,15 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         intent.putExtra("charity",selectedCharity);
         //intent.putExtra(Intent.EXTRA_TEXT, ""+selectedCharity.getId());
         startActivity(intent);
+    }
+    // Animation RecyclerView
+    private void runLayoutAnimation(final RecyclerView recyclerView) {
+        final Context context = recyclerView.getContext();
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(context, R.anim.rv_layout_animation);
+
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 }

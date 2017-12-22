@@ -22,7 +22,7 @@
             <RelativeLayout
                 android:id="@+id/rv_icon_layout"
                 android:layout_width="60dp"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:layout_marginLeft="@dimen/medium_margin"
@@ -34,17 +34,18 @@
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/no_charity_icon_bg" />
+                    android:scaleType="centerCrop" />
 
                 <com.mikepenz.iconics.view.IconicsImageView
                     android:id="@+id/rv_charity_default_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    app:iiv_color="@color/background"
-                    app:iiv_icon="gmd_card_giftcard" />
+                    android:background="@drawable/circular_image_logo"
+                    app:iiv_icon="gmd_card_giftcard"
+                    app:iiv_size="24dp"
+                    app:iiv_color="@android:color/white"/>
 
             </RelativeLayout>
 

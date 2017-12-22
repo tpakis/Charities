@@ -2,23 +2,27 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     android:fillViewport="false"
     android:orientation="vertical">
 
+    <!-- This RL contains everything -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/small_margin">
 
+        <!-- This RL contains everything that has to do with the "Gradient" Panel at the top -->
         <RelativeLayout
             android:id="@+id/detail_frame_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shadow_border">
 
+            <!-- This RL contains the elements used to create the circular image of the charity's logo -->
             <RelativeLayout
                 android:id="@+id/detail_image_icon_layout"
                 android:layout_width="90dp"
@@ -27,24 +31,25 @@
                 android:layout_marginBottom="@dimen/small_margin"
                 android:layout_marginTop="@dimen/large_margin">
 
+                <!-- This one is going to be visible only when there is a charity's icon source -->
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/detail_charity_icon"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/no_charity_icon_bg" />
+                    android:scaleType="centerCrop" />
 
+                <!-- This one is going to be visible only when there is not a charity's icon source -->
                 <com.mikepenz.iconics.view.IconicsImageView
                     android:id="@+id/detail_charity_default_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    app:iiv_color="@color/background"
-                    app:iiv_icon="gmd_card_giftcard" />
-
+                    android:background="@drawable/circular_image_logo"
+                    app:iiv_color="@android:color/white"
+                    app:iiv_icon="gmd_card_giftcard"
+                    app:iiv_size="35dp" />
             </RelativeLayout>
 
 
@@ -61,95 +66,110 @@
                 android:textSize="@dimen/huge_font_size" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/detail_call_layout"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/detail_donation_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/detail_frame_layout"
             android:layout_marginTop="@dimen/medium_margin"
-            android:orientation="horizontal">
+            android:fontFamily="@font/roboto"
+            android:text="@string/donate"
+            android:textSize="@dimen/large_font_size" />
 
-            <com.mikepenz.iconics.view.IconicsButton
+        <View
+            android:id="@+id/detail_divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/detail_donation_title"
+            android:layout_marginBottom="@dimen/tiny_margin"
+            android:layout_marginTop="@dimen/tiny_margin"
+            android:background="@color/primary" />
+
+        <!-- This LL contains the Call and SMS buttons -->
+        <LinearLayout
+            android:id="@+id/detail_buttons_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_divider1"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
                 android:id="@+id/detail_button_call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:background="@android:color/white"
-                android:fontFamily="@font/roboto"
-                android:paddingRight="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_weight="1"
+                android:background="@drawable/call_round_button"
+                android:fontFamily="@font/fontawesome_webfont"
                 android:text="@string/call"
-                android:textColor="@android:color/holo_green_light"
-                android:textSize="@dimen/medium_font_size"
-                app:iiv_start_color="@android:color/holo_green_light"
-                app:iiv_start_icon="gmd_call"
-                app:iiv_start_padding="@dimen/small_margin"
-                app:iiv_start_size="40dp" />
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/medium_font_size" />
+
+            <Button
+                android:id="@+id/detail_button_sms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/large_margin"
+                android:layout_weight="1"
+                android:background="@drawable/sms_round_button"
+                android:fontFamily="@font/fontawesome_webfont"
+                android:text="@string/sms"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/medium_font_size" />
+        </LinearLayout>
+
+        <!-- This LL contains the call and sms costs -->
+        <LinearLayout
+            android:id="@+id/detail_cost_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail_buttons_layout"
+            android:layout_marginTop="@dimen/tiny_margin"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <TextView
                 android:id="@+id/detail_call_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/detail_button_call"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_weight="1"
                 android:fontFamily="@font/roboto"
-                android:paddingLeft="@dimen/small_margin"
+                android:gravity="center_horizontal"
                 android:text="@string/call_cost"
                 android:textColor="@color/accent"
                 android:textSize="@dimen/tiny_font_size" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/detail_sms_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/detail_call_layout"
-            android:layout_marginTop="@dimen/small_margin"
-            android:orientation="horizontal">
-
-            <com.mikepenz.iconics.view.IconicsButton
-                android:id="@+id/detail_button_sms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:background="@android:color/white"
-                android:fontFamily="@font/roboto"
-                android:paddingRight="@dimen/small_margin"
-                android:text="@string/sms"
-                android:textColor="@android:color/holo_orange_light"
-                android:textSize="@dimen/medium_font_size"
-                app:iiv_start_color="@android:color/holo_orange_light"
-                app:iiv_start_icon="gmd_sms"
-                app:iiv_start_padding="@dimen/small_margin"
-                app:iiv_start_size="40dp" />
 
             <TextView
+                android:id="@+id/detail_sms_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/detail_button_sms"
+                android:layout_weight="1"
                 android:fontFamily="@font/roboto"
-                android:paddingLeft="@dimen/small_margin"
+                android:gravity="center_horizontal"
                 android:text="@string/sms_cost"
                 android:textColor="@color/accent"
                 android:textSize="@dimen/tiny_font_size" />
-
-        </RelativeLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/detail_description_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/detail_sms_layout"
+            android:layout_below="@+id/detail_cost_layout"
             android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/small_margin"
             android:fontFamily="@font/roboto"
-            android:paddingTop="@dimen/medium_margin"
+            android:paddingTop="@dimen/small_margin"
             android:text="@string/desc"
             android:textSize="@dimen/large_font_size" />
 
         <View
-            android:id="@+id/detail_divider"
+            android:id="@+id/detail_divider2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/detail_description_title"
@@ -161,7 +181,7 @@
             android:id="@+id/detail_desc_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/detail_divider"
+            android:layout_below="@id/detail_divider2"
             android:fontFamily="@font/roboto"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             android:textSize="@dimen/small_font_size" />

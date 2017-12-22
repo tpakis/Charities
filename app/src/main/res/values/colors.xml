@@ -9,4 +9,9 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
     <color name="background">#F5F5F5</color>
+
+    <!-- Gradient background used in charity's details -->
+    <color name="redish">#c0392b</color>
+    <color name="purple">#8e44ad</color>
+
 </resources>

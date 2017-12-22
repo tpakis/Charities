@@ -6,6 +6,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_results"
+        android:layoutAnimation="@anim/rv_layout_animation"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

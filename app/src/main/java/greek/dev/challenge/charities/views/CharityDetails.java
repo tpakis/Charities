@@ -40,10 +40,12 @@ public class CharityDetails extends AppCompatActivity {
         }
 
         Intent intentStartedThisActivity = getIntent();
-        if(intentStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)){
+        Charity selectedCharity = intentStartedThisActivity.getExtras().getParcelable("charity");
+        setData(selectedCharity);
+        /*if(intentStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)){
             int selectedCharityId = Integer.parseInt(intentStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT));
             setData(selectedCharityId);
-        }
+        }*/
 
     }
 
@@ -56,39 +58,27 @@ public class CharityDetails extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setData(int id){
+    private void setData(Charity selectedCharity){
 
-        // TODO THE CODE BELLOW IS FOR TESTING. has to be removed to implement it using the real data.
-        // ------------------------------------------------
-        Charity test1 = new Charity(1, "Charity Name 1", "lalala1", "5", "test", "test", "10", "10", "lala", "test");
-        Charity test2 = new Charity(2, "Charity Name 2", "lalala2", "6", "test2", "test2", "102", "102", "lal2a", "test2");
-
-        ArrayList<Charity> testing = new ArrayList<Charity>();
-        testing.add(test1);
-        testing.add(test2);
-
-        for(Charity c : testing){
-            if(c.getId() == id){
-                tv_charity_name.setText(c.getName());
-                tv_charity_desc.setText(c.getDescription());
+                tv_charity_name.setText(selectedCharity.getName());
+                tv_charity_desc.setText(selectedCharity.getDescription());
         // ------------------------------------------------
 
-                //same idea like in adapter
+        //same idea like in adapter
 
                  /* NOTE. if the charity's image is available, then we should use:
             holder.iv_charity_default_icon.setVisibility(View.INVISIBLE);
             holder.iv_charity_icon.setImageResource(); (or a similar method to set the source)
-
             but if the charity's image in not available, then we should use:
             holder.iv_charity_default_icon.setVisibility(View.VISIBLE);
             holder.iv_charity_icon.setImageResource(R.drawable.no_charity_icon_bg);  */
 
-                // has to be implemented the getIconlink provides link not image
-                // holder.iv_charity_icon.setImageResource(charityObject.getIconLink());
-                // The user can't send data to the firebase db yet, so it can't be implemented
-                // holder.rb_rating.setNumStars(sampleDataObject.getStars());
+        // has to be implemented the getIconlink provides link not image
+        // holder.iv_charity_icon.setImageResource(charityObject.getIconLink());
+        // The user can't send data to the firebase db yet, so it can't be implemented
+        // holder.rb_rating.setNumStars(sampleDataObject.getStars());
 
-            }
-        }
+
     }
+
 }

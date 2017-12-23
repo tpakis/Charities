@@ -43,7 +43,6 @@ dependencies {
     implementation "com.mikepenz:iconics-views:3.0.0@aar"
     implementation 'com.mikepenz:google-material-typeface:3.0.1.2.original@aar'
     implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.4@aar'
-    implementation 'com.mikepenz:fontawesome-typeface:+@aar'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

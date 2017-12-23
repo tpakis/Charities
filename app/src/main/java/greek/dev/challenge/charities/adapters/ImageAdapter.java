@@ -15,18 +15,18 @@ import greek.dev.challenge.charities.R;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    public String[] web = {//todo get that from string array
-            "Κάνε Δωρεά",
-            "Ιδρύματα",
-            "Oι Ευχές σας",
-            "Πολιτική Προστασίας",
+    public Integer[] web = {
+            R.string.make_donation,
+            R.string.add_donation,
+            R.string.make_wish,
+            R.string.info
     };
 
     public Integer[] Imageid = {
             R.drawable.ic_donate,
-            R.drawable.ic_organizations,
+            R.drawable.ic_add,
             R.drawable.ic_wishes,
-            R.drawable.ic_privacy,
+            R.drawable.ic_info,
     };
 
     public ImageAdapter(Context c )
@@ -62,7 +62,7 @@ public class ImageAdapter extends BaseAdapter {
             // set value into textview
             TextView textView = (TextView)
                     gridView.findViewById(R.id.grid_item_label);
-            textView.setText(web[position]);
+            textView.setText(mContext.getString(web[position]));
             // set image based on selected text
             ImageView imageView = (ImageView)
                     gridView.findViewById(R.id.grid_item_image);

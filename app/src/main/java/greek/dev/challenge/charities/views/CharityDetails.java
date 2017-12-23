@@ -5,15 +5,17 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.model.Charity;
+import greek.dev.challenge.charities.utilities.CallAndSms;
 
 public class CharityDetails extends AppCompatActivity {
 
@@ -29,6 +31,21 @@ public class CharityDetails extends AppCompatActivity {
     @BindView(R.id.detail_desc_text)
     public TextView tv_charity_desc;
 
+    @BindView(R.id.detail_button_call)
+    public Button makeCall;
+
+    @BindView(R.id.detail_button_sms)
+    public Button sendSms;
+
+    @BindView(R.id.detail_call_cost)
+    public TextView tv_call_cost;
+
+    @BindView(R.id.detail_sms_cost)
+    public TextView tv_sms_cost;
+
+
+    Charity selectedCharity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +57,25 @@ public class CharityDetails extends AppCompatActivity {
         }
 
         Intent intentStartedThisActivity = getIntent();
-        Charity selectedCharity = intentStartedThisActivity.getExtras().getParcelable("charity");
+        selectedCharity = intentStartedThisActivity.getExtras().getParcelable("charity");
         setData(selectedCharity);
-        /*if(intentStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)){
-            int selectedCharityId = Integer.parseInt(intentStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT));
-            setData(selectedCharityId);
-        }*/
-
     }
 
+    @OnClick(R.id.detail_button_call)
+    public void callButton(View view){
+        Intent i = CallAndSms.call(this,selectedCharity.getTelephone());
+        if (i != null){
+            startActivity(i);
+        }
+    }
+
+    @OnClick(R.id.detail_button_sms)
+    public void smsButton(View view){
+        Intent i = CallAndSms.sms(this,selectedCharity.getSms(),selectedCharity.getSmstext());
+        if (i != null){
+            startActivity(i);
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home){
@@ -62,6 +89,19 @@ public class CharityDetails extends AppCompatActivity {
 
                 tv_charity_name.setText(selectedCharity.getName());
                 tv_charity_desc.setText(selectedCharity.getDescription());
+                if (selectedCharity.getSms().equals("0")){
+                    sendSms.setEnabled(false);
+                    tv_sms_cost.setText("");
+                }else{
+                    tv_sms_cost.setText(selectedCharity.getSmscost());
+                }
+                if (selectedCharity.getTelephone().equals("0")){
+                    makeCall.setEnabled(false);
+                    tv_call_cost.setText("");
+                }else{
+                    tv_call_cost.setText(selectedCharity.getTelephonecost());
+                }
+
         // ------------------------------------------------
 
         //same idea like in adapter

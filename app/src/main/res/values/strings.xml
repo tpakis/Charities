@@ -10,4 +10,14 @@
     <string name="call_cost">cost per call</string>
     <string name="sms_cost">cost per sms</string>
     <string name="desc">Description</string>
+    <!-- Main Activity XML -->
+    <string name="Social_icons">&#xf09a; &#xf099; &#xf232; </string>
+    <string name="Share">Διαδώστε!</string>
+    <!-- GridView Items -->
+    <string name="make_donation">Κάντε Δωρεά!</string>
+    <string name="add_donation">Προσθέστε Δωρεά!</string>
+    <string name="make_wish">Κάντε μια ευχή!</string>
+    <string name="info">Πληροφορίες</string>
+
+    <string name="open_dialog">"Γνωρίζετε κάποιο ίδρυμα - ΜΚΟ - Έρανο που δέχεται προσφορές μέσω SMS ή με κλήση σε κάποιον τηλεφωνικό αριθμό, το οποίο δεν περιέχεται στην εφαρμογή και θέλετε να το προσθέσετε;"</string>
 </resources>

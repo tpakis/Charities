@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#F44336</color>
-    <color name="primary_dark">#D32F2F</color>
+    <color name="primary">#ae160a</color>
+    <color name="primary_dark">#940000</color>
     <color name="primary_light">#FFCDD2</color>
     <color name="accent">#9E9E9E</color>
     <color name="primary_text">#212121</color>
@@ -9,4 +9,9 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
     <color name="background">#F5F5F5</color>
+
+    <!-- Gradient background used in charity's details -->
+    <color name="redish">#c0392b</color>
+    <color name="purple">#8e44ad</color>
+
 </resources>

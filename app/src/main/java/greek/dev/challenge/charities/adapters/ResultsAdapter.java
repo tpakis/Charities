@@ -1,6 +1,8 @@
 package greek.dev.challenge.charities.adapters;
 
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,39 +10,59 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.model.Charity;
 
 public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsHolder>{
 
-    // using sample data until real ones are available
     private ArrayList<Charity> charitiesResults;
 
-    public class ResultsHolder extends RecyclerView.ViewHolder {
+    private final CharitiesResultsAdapterOnClickHandler mClickHandler;
 
-        @BindView(R.id.charity_name)
+    public interface CharitiesResultsAdapterOnClickHandler {
+        void onClick(Charity selectedCharity);
+    }
+
+    public ResultsAdapter(CharitiesResultsAdapterOnClickHandler handler) {
+        mClickHandler = handler;
+    }
+
+
+    public class ResultsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.rv_charity_name)
         public TextView tv_charity_name;
 
-        @BindView(R.id.charity_info)
+        @BindView(R.id.rv_charity_summary)
         public TextView tv_charity_info;
 
-        @BindView(R.id.charity_icon)
-        public ImageView iv_charity_logo;
+        @BindView(R.id.rv_charity_icon)
+        public ImageView iv_charity_icon;
 
-        //he user can't send data to the firebase db yet, so it can't be implemented
-      //  @BindView(R.id.rating)
-       // public RatingBar rb_rating;
+        @BindView(R.id.rv_charity_default_icon)
+        public ImageView iv_charity_default_icon;
+
+        // the user can't send data to the firebase db yet, so it can't be implemented
+        // @BindView(R.id.rating)
+        // public RatingBar rb_rating;
 
         public ResultsHolder(View view) {
             super(view);
+            ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int positionClicked = getAdapterPosition();
+            Charity selectedCharity = charitiesResults.get(positionClicked);
+            mClickHandler.onClick(selectedCharity);
         }
     }
-
-    public ResultsAdapter() {
-    }
-
 
     @Override
     public ResultsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,10 +78,18 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
         Charity charityObject = charitiesResults.get(position);
         holder.tv_charity_name.setText(charityObject.getName());
         holder.tv_charity_info.setText(charityObject.getDescription());
-       // has to be implemented the getIconlink provides link not image
-        // holder.iv_charity_logo.setImageResource(charityObject.getIconLink());
-        //The user can't send data to the firebase db yet, so it can't be implemented
-        //holder.rb_rating.setNumStars(sampleDataObject.getStars());
+
+         /* NOTE. if the charity's image is available, then we should use:
+            holder.iv_charity_default_icon.setVisibility(View.INVISIBLE);
+            holder.iv_charity_icon.setImageResource(); (or a similar method to set the source)
+            but if the charity's image in not available, then we should use:
+            holder.iv_charity_default_icon.setVisibility(View.VISIBLE);
+            holder.iv_charity_icon.setImageResource(R.drawable.no_charity_icon_bg);  */
+
+        // has to be implemented the getIconlink provides link not image
+        // holder.iv_charity_icon.setImageResource(charityObject.getIconLink());
+        // The user can't send data to the firebase db yet, so it can't be implemented
+        // holder.rb_rating.setNumStars(sampleDataObject.getStars());
     }
 
     @Override
@@ -72,4 +102,5 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
         this.charitiesResults = charitiesResults;
         notifyDataSetChanged();
     }
+
 }

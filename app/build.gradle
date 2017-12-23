@@ -25,6 +25,7 @@ dependencies {
     // recyclerview
     compile 'com.android.support:recyclerview-v7:26.1.0'
     //cardview
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
 
     //Butterknife
@@ -36,6 +37,13 @@ dependencies {
     compile 'com.google.firebase:firebase-storage:11.4.2'
     //view model
     implementation "android.arch.lifecycle:extensions:1.0.0"
+
+    //Icons as font
+    implementation "com.mikepenz:iconics-core:3.0.0@aar"
+    implementation "com.mikepenz:iconics-views:3.0.0@aar"
+    implementation 'com.mikepenz:google-material-typeface:3.0.1.2.original@aar'
+    implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.4@aar'
+    implementation 'com.mikepenz:fontawesome-typeface:+@aar'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

@@ -47,6 +47,7 @@ public class Charity implements Parcelable {
      */
     private String imageurls;
 
+    private int DrawableIconPosition;
 
     public Charity(){
 
@@ -159,6 +160,9 @@ public class Charity implements Parcelable {
     public void setImageurls(String imageurls) {
         this.imageurls = imageurls;
     }
+    public int getDrawableIconPosition() {return DrawableIconPosition; }
+
+    public void setDrawableIconPosition(Integer drawableIconPosition) {DrawableIconPosition = drawableIconPosition;}
 
     @Override
     public String toString() {
@@ -193,6 +197,7 @@ public class Charity implements Parcelable {
         dest.writeString(this.telephonecost);
         dest.writeString(this.iconlink);
         dest.writeString(this.imageurls);
+        dest.writeInt(this.DrawableIconPosition);
     }
 
     protected Charity(Parcel in) {
@@ -206,6 +211,7 @@ public class Charity implements Parcelable {
         this.telephonecost = in.readString();
         this.iconlink = in.readString();
         this.imageurls = in.readString();
+        this.DrawableIconPosition=in.readInt();
     }
 
     public static final Creator<Charity> CREATOR = new Creator<Charity>() {

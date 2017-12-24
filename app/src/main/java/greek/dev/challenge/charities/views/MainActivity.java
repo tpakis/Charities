@@ -1,130 +1,113 @@
 package greek.dev.challenge.charities.views;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.AdapterView.OnItemClickListener;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.util.List;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.adapters.ImageAdapter;
-import greek.dev.challenge.charities.model.Charity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCharitiesDatabaseReference;
-    private ChildEventListener mChildEventListener;
-    private FirebaseStorage mFirebaseStorage;
-    private StorageReference mCharitiesPhotosStorageReference;
-    private MainViewModel viewModel;
+    @BindView(R.id.gridview)
+    GridView gridView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        ButterKnife.bind(this);
+        gridView.setAdapter(new ImageAdapter(this));
+    }
 
-        gridview.setOnItemClickListener(new OnItemClickListener()
-        {
+    @OnItemClick(R.id.gridview)
+    public void textShareSocialClick(View view, int position, long id){
+        switch (position){
+            case 0:
+                Intent myIntent = new Intent(view.getContext(), CharitiesResultsActivity.class);
+                startActivityForResult(myIntent, 0);
+                break;
+            case 1:
+                openGoogleform();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }
+    @OnClick({R.id.textViewShare,R.id.textViewSocial})
+    public void textShareSocialClick(View view) {
+        shareApp(this);
+    }
+
+    private static void shareApp(Context context) {
+        final String appPackageName = context.getPackageName();
+        final String appName = context.getString(R.string.app_name);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        String shareBodyText = "https://play.google.com/store/apps/details?id=" +
+                appPackageName;
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, appName);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareBodyText);
+        context.startActivity(Intent.createChooser(shareIntent, "Μοιραστείτε την εφαρμογή σε:"));
+    }
+    private void openGoogleform(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+
+        builder.setTitle("Προσθήκη Ιδρύματος");
+
+
+        builder.setMessage(getResources().getString(R.string.open_dialog));
+
+
+        //Yes Button
+        builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
-                if (position == 0) {
-                    Intent myIntent = new Intent(v.getContext(), CharitiesResultsActivity.class);
-                    startActivityForResult(myIntent, 0);
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://goo.gl/forms/wtJQeDD4VclJhfjk2"));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
                 }
+                dialog.dismiss();
             }
         });
 
-        //get reference to specific part of database - messages with mMessagesDatabaseReference
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mFirebaseStorage = FirebaseStorage.getInstance();
-
-        mCharitiesDatabaseReference = mFirebaseDatabase.getReference().child("charities");
-       // mCharitiesPhotosStorageReference = mFirebaseStorage.getReference().child("charities_photos");
-
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-
-        viewModel.getCharitiesList().observe(MainActivity.this, new Observer<List<Charity>>() {
+        //No Button
+        builder.setNegativeButton("Όχι", new DialogInterface.OnClickListener() {
             @Override
-            public void onChanged(@Nullable List<Charity> charitiesList) {
-                Log.v("main", charitiesList.get(charitiesList.size()-1).toString());
-                Log.v("main", String.valueOf(charitiesList.size()));
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
 
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        attachDatabaseReadListener();
-    }
-    private void attachDatabaseReadListener() {
-        if (mChildEventListener == null) {
-            mChildEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    //here we get the results from the firebase db
-                    Charity charity = dataSnapshot.getValue(Charity.class);
-                    viewModel.addCharity(charity);
-                }
+/*
+        //Cancel Button
+        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"Cancel button Clicked",Toast.LENGTH_LONG).show();
+                Log.i("Code2care ","Cancel button Clicked!");
+                dialog.dismiss();
+            }
+        });*/
 
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-            mCharitiesDatabaseReference.addChildEventListener(mChildEventListener);
-
-        }
-    }
-    private void detachDatabaseReadListener() {
-        if (mChildEventListener != null) {
-            mCharitiesDatabaseReference.removeEventListener(mChildEventListener);
-            mChildEventListener = null;
-        }
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        onSignedOutCleanup();
-    }
-    //not signed out now, but a cleanup is required onPause, so not to get duplicate EventListeners
-    private void onSignedOutCleanup(){
-        detachDatabaseReadListener();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
 
     }
 }

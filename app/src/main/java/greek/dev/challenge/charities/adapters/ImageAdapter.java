@@ -23,10 +23,10 @@ public class ImageAdapter extends BaseAdapter {
     };
 
     public Integer[] Imageid = {
-            R.drawable.ic_donate,
-            R.drawable.ic_add,
-            R.drawable.ic_wishes,
-            R.drawable.ic_info,
+            R.drawable.ic_donate2,
+            R.drawable.ic_add2,
+            R.drawable.ic_wishes2,
+            R.drawable.ic_info2,
     };
 
     public ImageAdapter(Context c )

@@ -36,6 +36,7 @@
                     android:id="@+id/detail_charity_icon"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
+                    app:civ_fill_color="#FFFFFF"
                     android:layout_centerHorizontal="true"
                     android:scaleType="centerCrop" />
 
@@ -94,73 +95,77 @@
             android:layout_marginTop="@dimen/small_margin"
             android:orientation="horizontal"
             android:weightSum="2">
-
-            <Button
-                android:id="@+id/detail_button_call"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/detail_call_rl"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/large_margin"
-                android:layout_marginRight="@dimen/small_margin"
-                android:layout_weight="1"
-                android:background="@drawable/call_round_button"
-                android:fontFamily="@font/fontawesome_webfont"
-                android:text="@string/call"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/medium_font_size" />
+                android:layout_weight="1">
 
-            <Button
-                android:id="@+id/detail_button_sms"
-                android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/detail_button_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/call_round_button"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/fontawesome_webfont"
+                    android:text="@string/call"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/medium_font_size" />
+                <TextView
+                    android:id="@+id/detail_call_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/detail_button_call"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:text="@string/call_cost"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/tiny_font_size" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/detail_sms_rl"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:layout_marginRight="@dimen/large_margin"
-                android:layout_weight="1"
-                android:background="@drawable/sms_round_button"
-                android:fontFamily="@font/fontawesome_webfont"
-                android:text="@string/sms"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/medium_font_size" />
+                android:layout_weight="1">
+
+                <Button
+
+                    android:id="@+id/detail_button_sms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/sms_round_button"
+                    android:fontFamily="@font/fontawesome_webfont"
+                    android:text="@string/sms"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/medium_font_size" />
+                <TextView
+                    android:id="@+id/detail_sms_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/detail_button_sms"
+                    android:layout_marginTop="@dimen/tiny_margin"
+                    android:fontFamily="@font/roboto"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:text="@string/sms_cost"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/tiny_font_size" />
+            </RelativeLayout>
         </LinearLayout>
 
-        <!-- This LL contains the call and sms costs -->
-        <LinearLayout
-            android:id="@+id/detail_cost_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/detail_buttons_layout"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/detail_call_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/small_margin"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto"
-                android:gravity="center_horizontal"
-                android:text="@string/call_cost"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/tiny_font_size" />
-
-            <TextView
-                android:id="@+id/detail_sms_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto"
-                android:gravity="center_horizontal"
-                android:text="@string/sms_cost"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/tiny_font_size" />
-        </LinearLayout>
 
         <TextView
             android:id="@+id/detail_description_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/detail_cost_layout"
+            android:layout_below="@id/detail_buttons_layout"
             android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/small_margin"
             android:fontFamily="@font/roboto"

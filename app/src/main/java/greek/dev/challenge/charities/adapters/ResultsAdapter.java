@@ -1,26 +1,29 @@
 package greek.dev.challenge.charities.adapters;
 
-import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
+import com.mikepenz.iconics.view.IconicsImageView;
+
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.model.Charity;
+import greek.dev.challenge.charities.views.CharitiesResultsActivity;
 
 public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsHolder>{
 
     private ArrayList<Charity> charitiesResults;
-
+    private Map<String, Integer> map = new HashMap<String, Integer>();
     private final CharitiesResultsAdapterOnClickHandler mClickHandler;
 
     public interface CharitiesResultsAdapterOnClickHandler {
@@ -41,10 +44,10 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
         public TextView tv_charity_info;
 
         @BindView(R.id.rv_charity_icon)
-        public ImageView iv_charity_icon;
+        public CircleImageView iv_charity_icon;
 
         @BindView(R.id.rv_charity_default_icon)
-        public ImageView iv_charity_default_icon;
+        public IconicsImageView iv_charity_default_icon;
 
         // the user can't send data to the firebase db yet, so it can't be implemented
         // @BindView(R.id.rating)
@@ -54,6 +57,8 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
+            map = CharitiesResultsActivity.getDrawablesMap();
+
         }
 
         @Override
@@ -74,11 +79,18 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
 
     @Override
     public void onBindViewHolder(ResultsHolder holder, int position) {
-        //TODO implement with the true data
         Charity charityObject = charitiesResults.get(position);
         holder.tv_charity_name.setText(charityObject.getName());
         holder.tv_charity_info.setText(charityObject.getDescription());
+        // If the charity's icon exist
+        if(map.containsKey(charityObject.getIconlink()))
+        {
+            holder.iv_charity_icon.setImageResource(map.get(charityObject.getIconlink()));
+            holder.iv_charity_default_icon.setVisibility(View.GONE);
 
+            charitiesResults.get(position).setDrawableIconPosition(map.get(charityObject.getIconlink()));
+
+        }
          /* NOTE. if the charity's image is available, then we should use:
             holder.iv_charity_default_icon.setVisibility(View.INVISIBLE);
             holder.iv_charity_icon.setImageResource(); (or a similar method to set the source)

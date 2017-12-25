@@ -18,6 +18,6 @@
     <string name="add_donation">Προσθέστε Δωρεά!</string>
     <string name="make_wish">Κάντε μια ευχή!</string>
     <string name="info">Πληροφορίες</string>
-
+    <string name="empty_view">Τα αποτελέσματα έρχονται...</string>
     <string name="open_dialog">"Γνωρίζετε κάποιο ίδρυμα - ΜΚΟ - Έρανο που δέχεται προσφορές μέσω SMS ή με κλήση σε κάποιον τηλεφωνικό αριθμό, το οποίο δεν περιέχεται στην εφαρμογή και θέλετε να το προσθέσετε;"</string>
 </resources>

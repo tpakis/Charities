@@ -1,19 +1,16 @@
 package greek.dev.challenge.charities.adapters;
 
-import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import com.mikepenz.iconics.view.IconicsImageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -21,6 +18,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.model.Charity;
+import greek.dev.challenge.charities.views.CharitiesResultsActivity;
 
 public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsHolder>{
 
@@ -59,21 +57,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
-            map.put("actionaid", R.drawable.actionaid);
-            map.put("antikarkiniki", R.drawable.antikarkiniki);
-            map.put("anima", R.drawable.anima);
-            map.put("edke", R.drawable.edke);
-            map.put("elepap", R.drawable.elepap);
-            map.put("elpida", R.drawable.elpida);
-            map.put("grammis_sos", R.drawable.grammis_sos);
-            map.put("i_pisti", R.drawable.i_pisti);
-            map.put("iagkalia", R.drawable.iagkalia);
-
-            map.put("kibotos", R.drawable.kibotos);
-            map.put("theofilos", R.drawable.theofilos);
-            map.put("unicef", R.drawable.unicef);
-            map.put("xamogelo_paidiou", R.drawable.xamogelo_paidiou);
-            map.put("xwria_sos", R.drawable.xwria_sos);
+            map = CharitiesResultsActivity.getDrawablesMap();
 
         }
 
@@ -95,7 +79,6 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
 
     @Override
     public void onBindViewHolder(ResultsHolder holder, int position) {
-        //TODO implement with the true data
         Charity charityObject = charitiesResults.get(position);
         holder.tv_charity_name.setText(charityObject.getName());
         holder.tv_charity_info.setText(charityObject.getDescription());

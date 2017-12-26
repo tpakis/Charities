@@ -53,7 +53,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
     private ResultsAdapter mCharitiesAdapter;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCharitiesDatabaseReference;
+    private DatabaseReference mCharitiesDatabaseReference; //references specific part of the database (charities here)
     private ChildEventListener mChildEventListener;
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mCharitiesPhotosStorageReference;

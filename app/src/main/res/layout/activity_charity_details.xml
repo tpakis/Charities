@@ -1,195 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:id="@+id/arxiki"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:fillViewport="false"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:context=".views.CharitiesResultsActivity">
 
-    <!-- This RL contains everything -->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.AppBarLayout
+        style="@style/AppTheme.AppBarOverlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/small_margin">
+        android:layout_height="wrap_content"
+        android:background="@drawable/action_bar"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <!-- This RL contains everything that has to do with the "Gradient" Panel at the top -->
-        <RelativeLayout
-            android:id="@+id/detail_frame_layout"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shadow_border">
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/AppTheme.PopupOverlay"
+            app:logo="@mipmap/ic_launcher" />
 
-            <!-- This RL contains the elements used to create the circular image of the charity's logo -->
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:background="@color/background"
+        android:fillViewport="false"
+        android:orientation="vertical">
+
+        <!-- This RL contains everything -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/small_margin">
+
+            <!-- This RL contains everything that has to do with the "Gradient" Panel at the top -->
             <RelativeLayout
-                android:id="@+id/detail_image_icon_layout"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:layout_marginTop="@dimen/large_margin">
+                android:id="@+id/detail_frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadow_border">
 
-                <!-- This one is going to be visible only when there is a charity's icon source -->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/detail_charity_icon"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    app:civ_fill_color="#FFFFFF"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="centerCrop" />
-
-                <!-- This one is going to be visible only when there is not a charity's icon source -->
-                <com.mikepenz.iconics.view.IconicsImageView
-                    android:id="@+id/detail_charity_default_icon"
+                <!-- This RL contains the elements used to create the circular image of the charity's logo -->
+                <RelativeLayout
+                    android:id="@+id/detail_image_icon_layout"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/circular_image_logo"
-                    app:iiv_color="@android:color/white"
-                    app:iiv_icon="gmd_card_giftcard"
-                    app:iiv_size="35dp" />
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/large_margin">
+
+                    <!-- This one is going to be visible only when there is a charity's icon source -->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/detail_charity_icon"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="centerCrop"
+                        app:civ_fill_color="#FFFFFF" />
+
+                    <!-- This one is going to be visible only when there is not a charity's icon source -->
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/detail_charity_default_icon"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/circular_image_logo"
+                        app:iiv_color="@android:color/white"
+                        app:iiv_icon="gmd_card_giftcard"
+                        app:iiv_size="35dp" />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/detail_charity_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/detail_image_icon_layout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/large_margin"
+                    android:fontFamily="@font/roboto"
+                    android:text="Fake Charity Name"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/huge_font_size" />
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/detail_donation_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_frame_layout"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/roboto"
+                android:text="@string/donate"
+                android:textSize="@dimen/large_font_size" />
+
+            <View
+                android:id="@+id/detail_divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/detail_donation_title"
+                android:layout_marginBottom="@dimen/tiny_margin"
+                android:layout_marginTop="@dimen/tiny_margin"
+                android:background="@color/primary" />
+
+            <!-- This LL contains the Call and SMS buttons -->
+            <LinearLayout
+                android:id="@+id/detail_buttons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_divider1"
+                android:layout_marginTop="@dimen/small_margin"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:id="@+id/detail_call_rl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/detail_button_call"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:background="@drawable/call_round_button"
+                        android:fontFamily="@font/fontawesome_webfont"
+                        android:text="@string/call"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/medium_font_size" />
+
+                    <TextView
+                        android:id="@+id/detail_call_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/detail_button_call"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/tiny_margin"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="center_horizontal"
+                        android:text="@string/call_cost"
+                        android:textColor="@color/accent"
+                        android:textSize="@dimen/tiny_font_size" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/detail_sms_rl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+
+                        android:id="@+id/detail_button_sms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:background="@drawable/sms_round_button"
+                        android:fontFamily="@font/fontawesome_webfont"
+                        android:text="@string/sms"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/medium_font_size" />
+
+                    <TextView
+                        android:id="@+id/detail_sms_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/detail_button_sms"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/tiny_margin"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="center_horizontal"
+                        android:text="@string/sms_cost"
+                        android:textColor="@color/accent"
+                        android:textSize="@dimen/tiny_font_size" />
+                </RelativeLayout>
+            </LinearLayout>
 
 
             <TextView
-                android:id="@+id/detail_charity_name"
+                android:id="@+id/detail_description_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/detail_image_icon_layout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/large_margin"
+                android:layout_below="@id/detail_buttons_layout"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/small_margin"
                 android:fontFamily="@font/roboto"
-                android:text="Fake Charity Name"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/huge_font_size" />
+                android:paddingTop="@dimen/small_margin"
+                android:text="@string/desc"
+                android:textSize="@dimen/large_font_size" />
+
+            <View
+                android:id="@+id/detail_divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/detail_description_title"
+                android:layout_marginBottom="@dimen/tiny_margin"
+                android:layout_marginTop="@dimen/tiny_margin"
+                android:background="@color/primary" />
+
+            <TextView
+                android:id="@+id/detail_desc_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detail_divider2"
+                android:fontFamily="@font/roboto"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                android:textSize="@dimen/small_font_size" />
+
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/detail_donation_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/detail_frame_layout"
-            android:layout_marginTop="@dimen/medium_margin"
-            android:fontFamily="@font/roboto"
-            android:text="@string/donate"
-            android:textSize="@dimen/large_font_size" />
-
-        <View
-            android:id="@+id/detail_divider1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/detail_donation_title"
-            android:layout_marginBottom="@dimen/tiny_margin"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:background="@color/primary" />
-
-        <!-- This LL contains the Call and SMS buttons -->
-        <LinearLayout
-            android:id="@+id/detail_buttons_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/detail_divider1"
-            android:layout_marginTop="@dimen/small_margin"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <RelativeLayout
-                android:id="@+id/detail_call_rl"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/detail_button_call"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/call_round_button"
-                    android:layout_marginLeft="@dimen/small_margin"
-                    android:layout_marginRight="@dimen/small_margin"
-                    android:layout_centerHorizontal="true"
-                    android:fontFamily="@font/fontawesome_webfont"
-                    android:text="@string/call"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/medium_font_size" />
-                <TextView
-                    android:id="@+id/detail_call_cost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/tiny_margin"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@id/detail_button_call"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center_horizontal"
-                    android:text="@string/call_cost"
-                    android:textColor="@color/accent"
-                    android:textSize="@dimen/tiny_font_size" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/detail_sms_rl"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <Button
-
-                    android:id="@+id/detail_button_sms"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/small_margin"
-                    android:layout_marginRight="@dimen/small_margin"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/sms_round_button"
-                    android:fontFamily="@font/fontawesome_webfont"
-                    android:text="@string/sms"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/medium_font_size" />
-                <TextView
-                    android:id="@+id/detail_sms_cost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/detail_button_sms"
-                    android:layout_marginTop="@dimen/tiny_margin"
-                    android:fontFamily="@font/roboto"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center_horizontal"
-                    android:text="@string/sms_cost"
-                    android:textColor="@color/accent"
-                    android:textSize="@dimen/tiny_font_size" />
-            </RelativeLayout>
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/detail_description_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/detail_buttons_layout"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/small_margin"
-            android:fontFamily="@font/roboto"
-            android:paddingTop="@dimen/small_margin"
-            android:text="@string/desc"
-            android:textSize="@dimen/large_font_size" />
-
-        <View
-            android:id="@+id/detail_divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/detail_description_title"
-            android:layout_marginBottom="@dimen/tiny_margin"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:background="@color/primary" />
-
-        <TextView
-            android:id="@+id/detail_desc_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/detail_divider2"
-            android:fontFamily="@font/roboto"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            android:textSize="@dimen/small_font_size" />
-
-    </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

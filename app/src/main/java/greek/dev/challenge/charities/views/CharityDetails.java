@@ -1,9 +1,14 @@
 package greek.dev.challenge.charities.views;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +26,7 @@ import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.model.Charity;
 import greek.dev.challenge.charities.utilities.CallAndSms;
 
-public class CharityDetails extends AppCompatActivity {
+public class CharityDetails extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.detail_charity_icon)
     public CircleImageView iv_charity_icon;
@@ -47,18 +52,26 @@ public class CharityDetails extends AppCompatActivity {
     @BindView(R.id.detail_sms_cost)
     public TextView tv_sms_cost;
 
-
     Charity selectedCharity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_charity_details);
+        setContentView(R.layout.activity_main_details);
         ButterKnife.bind(this);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         Intent intentStartedThisActivity = getIntent();
         selectedCharity = intentStartedThisActivity.getExtras().getParcelable("charity");
@@ -128,6 +141,40 @@ public class CharityDetails extends AppCompatActivity {
         // holder.rb_rating.setNumStars(sampleDataObject.getStars());
 
 
+    }
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        if (id == R.id.nav_home) {
+            Intent i = new Intent(CharityDetails.this, MainActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_donate) {
+            Intent i = new Intent(CharityDetails.this, CharitiesResultsActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_add_donation) {
+            Intent i = new Intent(CharityDetails.this, MainActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_make_wish) {
+            Intent i = new Intent(CharityDetails.this, MainActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_info) {
+            Intent i = new Intent(CharityDetails.this, MainActivity.class);
+            startActivity(i);
+        }
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
 }

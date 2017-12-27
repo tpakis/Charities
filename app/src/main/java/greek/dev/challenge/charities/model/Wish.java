@@ -27,7 +27,7 @@ public class Wish {
     public static ArrayList<Wish> createWishList (int number) {
         ArrayList wishList = new ArrayList(number);
         for (int i = 0; i < number; i ++) {
-            Wish fakeWish = new Wish("WishWishWishWishWish" + i, "Author" + i);
+            Wish fakeWish = new Wish("Wish" + i, "Author" + i);
             wishList.add(i, fakeWish );
         }
         return wishList;

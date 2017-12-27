@@ -14,5 +14,6 @@
     <!-- Gradient background used in charity's details -->
     <color name="redish">#c0392b</color>
     <color name="purple">#8e44ad</color>
-
+    <color name="dot_dark">#455A64</color> <!--onboarding dots active-->
+    <color name="dot_light">#607D8B</color> <!--onboarding dots inactive-->
 </resources>

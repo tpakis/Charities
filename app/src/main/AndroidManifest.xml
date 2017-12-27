@@ -21,6 +21,8 @@
 
         <activity android:name=".views.MainActivity" />
 
+        <activity android:name=".views.OnboardingActivity" />
+
         <activity android:name=".views.CharitiesResultsActivity"
             android:launchMode="singleTop"/>
 

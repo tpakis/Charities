@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,7 +26,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +46,9 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
 
     @BindView(R.id.pb_loading_indicator)
     public ProgressBar pb_loading_indicator;
+
+    @BindView(R.id.todo_list_empty_view)
+    public LinearLayout emptyView;
 
     private ResultsAdapter mCharitiesAdapter;
 
@@ -84,7 +90,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         mFirebaseStorage = FirebaseStorage.getInstance();
 
         mCharitiesDatabaseReference = mFirebaseDatabase.getReference().child("charities");
-
+        mCharitiesDatabaseReference.keepSynced(true);
         // mCharitiesPhotosStorageReference = mFirebaseStorage.getReference().child("charities_photos");
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
@@ -92,6 +98,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         viewModel.getCharitiesList().observe(CharitiesResultsActivity.this, new Observer<ArrayList<Charity>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Charity> charitiesList) {
+                emptyView.setVisibility(View.GONE);
                 mCharitiesAdapter.setSeriesResults(charitiesList);
                 Log.v("main", charitiesList.get(charitiesList.size()-1).toString());
                 Log.v("main", String.valueOf(charitiesList.size()));
@@ -182,8 +189,6 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         tv_error_message.setVisibility(View.VISIBLE);
     }
 
-
-    // we pass the id of the charity selected to the detail activity in order to be able to get the needed info later
     @Override
     public void onClick(Charity selectedCharity) {
         Context context = this;
@@ -201,5 +206,25 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         recyclerView.setLayoutAnimation(controller);
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scheduleLayoutAnimation();
+    }
+    public static Map getDrawablesMap(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("actionaid", R.drawable.actionaid);
+        map.put("antikarkiniki", R.drawable.antikarkiniki);
+        map.put("anima", R.drawable.anima);
+        map.put("edke", R.drawable.edke);
+        map.put("elepap", R.drawable.elepap);
+        map.put("elpida", R.drawable.elpida);
+        map.put("grammis_sos", R.drawable.grammis_sos);
+        map.put("i_pisti", R.drawable.i_pisti);
+        map.put("iagkalia", R.drawable.iagkalia);
+
+        map.put("kibotos", R.drawable.kibotos);
+        map.put("makeawish", R.drawable.makeawish);
+        map.put("theofilos", R.drawable.theofilos);
+        map.put("unicef", R.drawable.unicef);
+        map.put("xamogelo_paidiou", R.drawable.xamogelo_paidiou);
+        map.put("xwria_sos", R.drawable.xwria_sos);
+        return map;
     }
 }

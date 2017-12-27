@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 openGoogleform();
                 break;
             case 2:
+                Intent startWishList = new Intent(view.getContext(), ListWishesActivity.class);
+                startActivityForResult(startWishList, 0);
                 break;
             case 3:
                 break;

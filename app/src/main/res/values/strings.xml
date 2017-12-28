@@ -30,4 +30,9 @@
     <string name="slide_3_desc">Pick with which way you would like to donate.\n(SMS or Phone call)</string>
     <string name="slide_4_desc">Don\'t forget to send your wishes!</string>
 
+    <!--Navigation drawer-->
+    <string name="home">Κεντρική Σελίδα</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>

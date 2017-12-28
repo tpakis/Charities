@@ -66,14 +66,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private void openGoogleform(){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-
-
         builder.setTitle("Προσθήκη Ιδρύματος");
-
-
         builder.setMessage(getResources().getString(R.string.open_dialog));
-
-
         //Yes Button
         builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
             @Override
@@ -86,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
         //No Button
         builder.setNegativeButton("Όχι", new DialogInterface.OnClickListener() {
             @Override
@@ -94,21 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
-/*
-        //Cancel Button
-        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"Cancel button Clicked",Toast.LENGTH_LONG).show();
-                Log.i("Code2care ","Cancel button Clicked!");
-                dialog.dismiss();
-            }
-        });*/
-
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
     }
 }

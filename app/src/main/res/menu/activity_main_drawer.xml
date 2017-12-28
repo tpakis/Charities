@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/app_name">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/home"
+                android:title="@string/home" />
+            <item
+                android:id="@+id/nav_donate"
+                android:icon="@drawable/ic_donate2"
+                android:title="@string/make_donation" />
+            <item
+                android:id="@+id/nav_add_donation"
+                android:icon="@drawable/ic_add"
+                android:title="@string/add_donation" />
+            <item
+                android:id="@+id/nav_make_wish"
+                android:icon="@drawable/ic_wishes2"
+                android:title="@string/make_wish" />
+            <item
+                android:id="@+id/nav_info"
+                android:icon="@drawable/ic_info2"
+                android:title="@string/info" />
+
+        </menu>
+    </item>
+</menu>

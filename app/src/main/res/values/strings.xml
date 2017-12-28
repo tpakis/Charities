@@ -18,6 +18,21 @@
     <string name="add_donation">Προσθέστε Δωρεά!</string>
     <string name="make_wish">Κάντε μια ευχή!</string>
     <string name="info">Πληροφορίες</string>
-
+    <string name="empty_view">Τα αποτελέσματα έρχονται…</string>
     <string name="open_dialog">"Γνωρίζετε κάποιο ίδρυμα - ΜΚΟ - Έρανο που δέχεται προσφορές μέσω SMS ή με κλήση σε κάποιον τηλεφωνικό αριθμό, το οποίο δεν περιέχεται στην εφαρμογή και θέλετε να το προσθέσετε;"</string>
+
+    <!--Onboarding screens-->
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+    <string name="slide_1_desc">Charities is the easiest way to make a donation!</string>
+    <string name="slide_2_desc">Just select the organization you would like to contribute</string>
+    <string name="slide_3_desc">Pick with which way you would like to donate.\n(SMS or Phone call)</string>
+    <string name="slide_4_desc">Don\'t forget to send your wishes!</string>
+
+    <!--Navigation drawer-->
+    <string name="home">Κεντρική Σελίδα</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>

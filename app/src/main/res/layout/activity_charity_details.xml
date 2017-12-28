@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detail_image_icon_layout"
                 android:layout_centerHorizontal="true"
+                android:textAlignment="center"
                 android:layout_marginBottom="@dimen/large_margin"
                 android:fontFamily="@font/roboto"
                 android:text="Fake Charity Name"

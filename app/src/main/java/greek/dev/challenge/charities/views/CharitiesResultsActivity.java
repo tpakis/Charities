@@ -3,8 +3,11 @@ package greek.dev.challenge.charities.views;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +19,12 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +45,8 @@ import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.adapters.ResultsAdapter;
 import greek.dev.challenge.charities.model.Charity;
 
-public class CharitiesResultsActivity extends AppCompatActivity implements ResultsAdapter.CharitiesResultsAdapterOnClickHandler {
+public class CharitiesResultsActivity extends AppCompatActivity implements ResultsAdapter.CharitiesResultsAdapterOnClickHandler, NavigationView.OnNavigationItemSelectedListener {
+
 
     @BindView(R.id.rv_results)
     public RecyclerView rv_charities;
@@ -53,7 +63,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
     private ResultsAdapter mCharitiesAdapter;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCharitiesDatabaseReference;
+    private DatabaseReference mCharitiesDatabaseReference; //references specific part of the database (charities here)
     private ChildEventListener mChildEventListener;
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mCharitiesPhotosStorageReference;
@@ -63,9 +73,18 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_charities_results);
+        setContentView(R.layout.activity_charities_results_nav);
         ButterKnife.bind(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
@@ -226,5 +245,61 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         map.put("xamogelo_paidiou", R.drawable.xamogelo_paidiou);
         map.put("xwria_sos", R.drawable.xwria_sos);
         return map;
+    }
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        if (id == R.id.nav_home) {
+            Intent i = new Intent(CharitiesResultsActivity.this, MainActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_add_donation) {
+            openGoogleform();
+        } else if (id == R.id.nav_make_wish) {
+            Intent i = new Intent(CharitiesResultsActivity.this, ListWishesActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_info) {
+            Intent i = new Intent(CharitiesResultsActivity.this, MainActivity.class);
+            startActivity(i);
+        }
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+    private void openGoogleform(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(CharitiesResultsActivity.this);
+        builder.setTitle("Προσθήκη Ιδρύματος");
+        builder.setMessage(getResources().getString(R.string.open_dialog));
+        //Yes Button
+        builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://goo.gl/forms/wtJQeDD4VclJhfjk2"));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+                dialog.dismiss();
+            }
+        });
+        //No Button
+        builder.setNegativeButton("Όχι", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

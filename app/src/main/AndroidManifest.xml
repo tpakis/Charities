@@ -21,14 +21,24 @@
 
         <activity android:name=".views.MainActivity" />
 
+        <activity android:name=".views.OnboardingActivity" />
+
         <activity android:name=".views.CharitiesResultsActivity"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:theme="@style/RVTheme"/>
 
         <activity android:name=".views.CharityDetails"
             android:parentActivityName=".views.CharitiesResultsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.CharitiesResultsActivity"/>
+        </activity>
+
+        <activity android:name=".views.ListWishesActivity"
+            android:parentActivityName=".views.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.ListWishesActivity"/>
         </activity>
 
     </application>

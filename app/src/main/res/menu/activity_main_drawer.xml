@@ -13,7 +13,7 @@
                 android:title="@string/make_donation" />
             <item
                 android:id="@+id/nav_add_donation"
-                android:icon="@drawable/ic_add"
+                android:icon="@drawable/ic_add3"
                 android:title="@string/add_donation" />
             <item
                 android:id="@+id/nav_make_wish"

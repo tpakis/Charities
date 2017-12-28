@@ -4,15 +4,11 @@ import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.mikepenz.iconics.view.IconicsImageView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,8 +16,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.model.Charity;
 import greek.dev.challenge.charities.utilities.CallAndSms;
+import greek.dev.challenge.charities.utilities.CharitiesPreferences;
 
 public class CharityDetails extends AppCompatActivity {
+
+    private static final int REQUEST_CODE = 999;
 
     @BindView(R.id.detail_charity_icon)
     public CircleImageView iv_charity_icon;
@@ -49,6 +48,16 @@ public class CharityDetails extends AppCompatActivity {
 
 
     Charity selectedCharity;
+    private CharitiesPreferences charitiesPreferences;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_CODE){
+            charitiesPreferences.saveId(selectedCharity.getId());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,8 @@ public class CharityDetails extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        this.charitiesPreferences = new CharitiesPreferences(this);
+
         Intent intentStartedThisActivity = getIntent();
         selectedCharity = intentStartedThisActivity.getExtras().getParcelable("charity");
         setData(selectedCharity);
@@ -69,7 +80,7 @@ public class CharityDetails extends AppCompatActivity {
     public void callButton(View view){
         Intent i = CallAndSms.call(this,selectedCharity.getTelephone());
         if (i != null){
-            startActivity(i);
+            startActivityForResult(i, REQUEST_CODE);
         }
     }
 
@@ -77,7 +88,7 @@ public class CharityDetails extends AppCompatActivity {
     public void smsButton(View view){
         Intent i = CallAndSms.sms(this,selectedCharity.getSms(),selectedCharity.getSmstext());
         if (i != null){
-            startActivity(i);
+            startActivityForResult(i, REQUEST_CODE);
         }
     }
     @Override

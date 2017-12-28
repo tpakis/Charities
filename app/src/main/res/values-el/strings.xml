@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Charities</string>
+
+    <string name="error">Υπήρξε κάποιο σφάλμα! Παρακαλώ ξαναπροσπαθήστε!</string>
+
+    <!-- Charity Detail XML -->
+    <string name="sms">&#xf003; Στείλτε ένα SMS</string>
+    <string name="call">&#xf095; Καλέστε</string>
+    <string name="donate">Κάντε μία δωρεά:</string>
+    <string name="call_cost">χρέωση ανά κλήση</string>
+    <string name="sms_cost">χρέωση ανά sms</string>
+    <string name="desc">Περιγραφή</string>
+    <!-- Main Activity XML -->
+    <string name="Social_icons">&#xf09a; &#xf099; &#xf232; </string>
+    <string name="Share">Διαδώστε!</string>
+    <!-- GridView Items -->
+    <string name="make_donation">Κάντε Δωρεά!</string>
+    <string name="add_donation">Προσθέστε Δωρεά!</string>
+    <string name="make_wish">Κάντε μια ευχή!</string>
+    <string name="info">Πληροφορίες</string>
+    <string name="empty_view">Τα αποτελέσματα έρχονται…</string>
+    <string name="open_dialog">"Γνωρίζετε κάποιο ίδρυμα - ΜΚΟ - Έρανο που δέχεται προσφορές μέσω SMS ή με κλήση σε κάποιον τηλεφωνικό αριθμό, το οποίο δεν περιέχεται στην εφαρμογή και θέλετε να το προσθέσετε;"</string>
+
+    <!--Onboarding screens-->
+    <string name="next">Επόμενο</string>
+    <string name="skip">Προσπεράστε</string>
+    <string name="start">Το κατάλαβα</string>
+    <string name="slide_1_desc">Μέσα από την εφαρμογή μας μπορείτε να κάνετε μια δωρεά μέσα σε πολύ λίγο χρόνο!</string>
+    <string name="slide_2_desc">Διαλέξτε τον οργανισμό/ίδρυμα που θέλετε να συνεισφέρετε!</string>
+    <string name="slide_3_desc">Διαλέξτε τον τρόπο!\n(SMS ή Τηλεφωνική κλήση)</string>
+    <string name="slide_4_desc">Μη ξεχάσετε να στείλετε τις ευχές σας!</string>
+
+    <!--Navigation drawer-->
+    <string name="home">Κεντρική Σελίδα</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+</resources>

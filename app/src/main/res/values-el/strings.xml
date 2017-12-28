@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Charities</string>
-
+    <string name="yes">Ναι</string>
+    <string name="no">Όχι</string>
+    <string name="add_institute">Προσθήκη Ιδρύματος</string>
     <string name="error">Υπήρξε κάποιο σφάλμα! Παρακαλώ ξαναπροσπαθήστε!</string>
 
     <!-- Charity Detail XML -->
@@ -34,5 +36,6 @@
     <string name="home">Κεντρική Σελίδα</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="share_text">Μοιραστείτε την εφαρμογή σε:</string>
 
 </resources>

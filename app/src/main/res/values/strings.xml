@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Charities</string>
-
+    <string name="new_form_link" translatable="false">https://goo.gl/forms/wtJQeDD4VclJhfjk2</string>
+    <string name="yes">Υes</string>
+    <string name="no">Νo</string>
     <string name="error">An error has been occurred! Pleas try again!</string>
+    <string name="add_institute">Add Charity</string>
+    <string name="share_text">Share the app at:</string>
+    <string name="google_play_prefix" translatable="false">https://play.google.com/store/apps/details?id=</string>
+
 
     <!-- Charity Detail XML -->
     <string name="sms">&#xf003; Send an SMS</string>

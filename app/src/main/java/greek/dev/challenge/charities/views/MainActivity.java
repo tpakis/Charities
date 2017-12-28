@@ -1,5 +1,6 @@
 package greek.dev.challenge.charities.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.gridview)
     GridView gridView;
+    @BindString(R.string.add_institute)
+    public String addInstitute;
+    @BindString(R.string.yes)
+    public String yesString;
+    @BindString(R.string.no)
+    public String noString;
+    @BindString(R.string.new_form_link)
+    public String googleFormLink;
+    @BindString(R.string.open_dialog)
+    public String openDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,22 +72,22 @@ public class MainActivity extends AppCompatActivity {
         final String appName = context.getString(R.string.app_name);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        String shareBodyText = "https://play.google.com/store/apps/details?id=" +
+        String shareBodyText = context.getString(R.string.google_play_prefix) +
                 appPackageName;
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, appName);
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareBodyText);
-        context.startActivity(Intent.createChooser(shareIntent, "Μοιραστείτε την εφαρμογή σε:"));
+        context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.share_text)));
     }
     private void openGoogleform(){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Προσθήκη Ιδρύματος");
-        builder.setMessage(getResources().getString(R.string.open_dialog));
+        builder.setTitle(addInstitute);
+        builder.setMessage(openDialog);
         //Yes Button
-        builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(yesString, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://goo.gl/forms/wtJQeDD4VclJhfjk2"));
+                intent.setData(Uri.parse(googleFormLink));
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
@@ -81,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //No Button
-        builder.setNegativeButton("Όχι", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(noString, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

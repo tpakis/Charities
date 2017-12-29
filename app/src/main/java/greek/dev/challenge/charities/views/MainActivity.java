@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
         switch (position){
             case 0:
                 Intent myIntent = new Intent(view.getContext(), CharitiesResultsActivity.class);
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
                 startActivityForResult(myIntent, 0);
+                finish();
                 break;
             case 1:
                 openGoogleform();
@@ -105,5 +109,9 @@ public class MainActivity extends AppCompatActivity {
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 }

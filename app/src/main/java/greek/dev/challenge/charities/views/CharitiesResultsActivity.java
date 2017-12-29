@@ -271,9 +271,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_home) {
-            Intent i = new Intent(CharitiesResultsActivity.this, MainActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            startActivity(i);
+            goToMain();
         } else if (id == R.id.nav_add_donation) {
             openGoogleform();
         } else if (id == R.id.nav_make_wish) {
@@ -294,7 +292,8 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            goToMain();
         }
     }
     private void openGoogleform(){
@@ -322,5 +321,10 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+    private void goToMain(){
+        Intent i = new Intent(CharitiesResultsActivity.this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+        startActivity(i);
     }
 }

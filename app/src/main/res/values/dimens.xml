@@ -10,6 +10,7 @@
     <dimen name="medium_font_size">16sp</dimen>
     <dimen name="large_font_size">20sp</dimen>
     <dimen name="huge_font_size">24sp</dimen>
+    <dimen name="social_font_size">50sp</dimen>
 
     <!-- Onboarding Screens. -->
     <dimen name="dots_height">30dp</dimen>

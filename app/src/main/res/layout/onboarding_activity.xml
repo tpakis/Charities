@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_marginEnd="@dimen/small_margin"
         android:background="@null"
         android:text="@string/next" />
 
@@ -42,6 +43,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:background="@null"
+        android:layout_marginStart="@dimen/small_margin"
         android:text="@string/skip" />
 
 </RelativeLayout>

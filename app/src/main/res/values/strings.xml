@@ -40,5 +40,27 @@
     <string name="home">Κεντρική Σελίδα</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_info">Πληροφορίες</string>
+    <string name="large_text">
+        "Charities Android App by GreekCommunity \n\n"
+
+        "H Charities είναι  μια ομαδική δουλειά από την ελληνική κοινότητα κατά "
+        "την διάρκεια του προγράμματος …της Google.\n\n"
+
+        "Ο Σκοπός δημιουργίας αυτής της εφαρμογής είναι πέρα από τα μαθήματα να μπορούν να "
+        "συνεργαστούμε και σε ένα μεγαλύτερο και πιο ολοκληρωμένο project. \n\n"
+
+        "Mέσα από την εφαρμογή μας μπορείτε να κάνετε μια δωρεά μέσα σε πολύ λίγο χρόνο!\n\n"
+
+        "Διαλέξτε τον οργανισμό/ίδρυμα που θέλετε να συνεισφέρετε!\n\n"
+        "Διαλέξτε τον τρόπο!\n\n "
+
+        "(SMS ή Τηλεφωνική Τηλεφωνική κλήση)\n\n "
+        "Μη ξεχάσετε να στείλετε τις ευχές σας!\n\n"
+
+
+
+    </string>
+    <string name="action_settings">Settings</string>
 
 </resources>

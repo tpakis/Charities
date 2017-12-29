@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(startWishList, 0);
                 break;
             case 3:
+                Intent myInfo = new Intent(view.getContext(), InfoActivity.class);
+                startActivity(myInfo);
                 break;
         }
     }

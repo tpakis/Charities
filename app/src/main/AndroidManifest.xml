@@ -9,38 +9,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".views.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".views.MainActivity" />
-
         <activity android:name=".views.OnboardingActivity" />
-
-        <activity android:name=".views.CharitiesResultsActivity"
+        <activity
+            android:name=".views.CharitiesResultsActivity"
             android:launchMode="singleTop"
-            android:theme="@style/RVTheme"/>
-
-        <activity android:name=".views.CharityDetails"
+            android:theme="@style/RVTheme" />
+        <activity
+            android:name=".views.CharityDetails"
             android:parentActivityName=".views.CharitiesResultsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.CharitiesResultsActivity"/>
+                android:value=".views.CharitiesResultsActivity" />
         </activity>
-
-        <activity android:name=".views.ListWishesActivity"
+        <activity
+            android:name=".views.ListWishesActivity"
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.ListWishesActivity"/>
+                android:value=".views.ListWishesActivity" />
         </activity>
-
+        <activity
+            android:name=".views.InfoActivity"
+            android:label="@string/title_activity_info"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

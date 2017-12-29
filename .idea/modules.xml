@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Charities.iml" filepath="$PROJECT_DIR$/Charities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Charities.iml" filepath="$PROJECT_DIR$/.idea/Charities.iml" />
+      <module fileurl="file://C:\Users\ted\repo\Charities\Charities.iml" filepath="C:\Users\ted\repo\Charities\Charities.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\ted\repo\Charities\app\app.iml" filepath="C:\Users\ted\repo\Charities\app\app.iml" />
     </modules>
   </component>
 </project>

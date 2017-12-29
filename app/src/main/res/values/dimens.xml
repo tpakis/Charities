@@ -33,4 +33,5 @@
     <!--list activity wants it 200-->
     <dimen name="text_margin">16dp</dimen>
     <dimen name="divider_height">1dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

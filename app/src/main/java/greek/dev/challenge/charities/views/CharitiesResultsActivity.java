@@ -272,6 +272,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         int id = item.getItemId();
         if (id == R.id.nav_home) {
             Intent i = new Intent(CharitiesResultsActivity.this, MainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
             startActivity(i);
         } else if (id == R.id.nav_add_donation) {
             openGoogleform();

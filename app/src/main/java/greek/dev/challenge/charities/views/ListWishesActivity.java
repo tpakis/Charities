@@ -75,7 +75,7 @@ public class ListWishesActivity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     //results from database are deserialized
                     Wish wish = dataSnapshot.getValue(Wish.class);
-                    wishes.add(wish);
+                    wishes.add(0,wish);
                     adapter.notifyDataSetChanged();
                 }
 

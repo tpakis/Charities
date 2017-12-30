@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import greek.dev.challenge.charities.R;
@@ -19,7 +20,7 @@ import greek.dev.challenge.charities.model.Wish;
 public class WishAdapter extends
         RecyclerView.Adapter<WishAdapter.ViewHolder> {
 
-    private List<Wish> mWishes;
+    private List<Wish> mWishes = new ArrayList<>();
     private Context mContext;
 
     public WishAdapter(Context context, List<Wish> wishes) {

@@ -11,12 +11,21 @@ public class Wish {
 
     private String wish;
     private String author;
+    private int charityId;
+    private long timestamp;
 
-    public Wish(String wish, String author) {
-        this.author = author;
-        this.wish = wish;
+    public Wish(){
+        //default constructor needed...
     }
 
+    public Wish(String wish, String author, int charityId, long timestamp) {
+        this.author = author;
+        this.wish = wish;
+        this.charityId = charityId;
+        this.timestamp = timestamp;
+    }
+
+    //getters also needed
     public String getWish() {
         return wish;
     }
@@ -25,6 +34,12 @@ public class Wish {
         return author;
     }
 
+    public long getTimestamp() {return timestamp;}
+
+    public int getCharityId() {return charityId;}
+
+    //helper methods, to be DELETED!!!
+
     public static ArrayList<Wish> createWishList (int number) {
         ArrayList wishList = new ArrayList(number);
         for (int i = 0; i < number; i ++) {
@@ -32,7 +47,7 @@ public class Wish {
             String fakeWish = wishesArray[r.nextInt(wishesArray.length)];
             String fakeAuthor = nameArray[r.nextInt(nameArray.length)];
 
-            Wish newWish = new Wish(fakeWish, fakeAuthor);
+            Wish newWish = new Wish(fakeWish, fakeAuthor, 0 ,0);
             wishList.add(i, newWish );
         }
         return wishList;

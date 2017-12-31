@@ -15,6 +15,7 @@ import java.util.Set;
 public class CharitiesPreferences {
 
     private static final String PREF_NAME = "charities-prefs";
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
     private SharedPreferences reader;
     private SharedPreferences.Editor editor;
@@ -44,6 +45,16 @@ public class CharitiesPreferences {
         Set<String> set = this.reader.getStringSet("donatedIds", new HashSet<String>());
 
         return set.contains(String.valueOf(id));
+    }
+
+    // Onboarding
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return reader.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
 }

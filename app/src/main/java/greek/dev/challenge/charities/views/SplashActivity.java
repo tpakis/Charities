@@ -4,16 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class SplashActivity extends AppCompatActivity {
+import greek.dev.challenge.charities.utilities.CharitiesPreferences;
 
-    private OnboardingManager onboardingManager;
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Checking for first time launch
-        onboardingManager = new OnboardingManager(this);
+        CharitiesPreferences onboardingManager = new CharitiesPreferences(this);
         if (!onboardingManager.isFirstTimeLaunch()) {
             startActivity(new Intent(this, MainActivity.class));
         } else {

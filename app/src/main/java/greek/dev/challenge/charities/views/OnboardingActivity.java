@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import greek.dev.challenge.charities.R;
+import greek.dev.challenge.charities.utilities.CharitiesPreferences;
 
 public class OnboardingActivity extends AppCompatActivity {
 
@@ -26,7 +27,7 @@ public class OnboardingActivity extends AppCompatActivity {
     private LinearLayout dotsLayout;
     private int[] layouts;
     private Button btnSkip, btnNext;
-    private OnboardingManager onboardingManager;
+    private CharitiesPreferences onboardingManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class OnboardingActivity extends AppCompatActivity {
 
         setContentView(R.layout.onboarding_activity);
 
-        onboardingManager = new OnboardingManager(this);
+        onboardingManager = new CharitiesPreferences(this);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);

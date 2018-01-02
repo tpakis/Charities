@@ -7,8 +7,15 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.data.DataFetcher;
+import com.bumptech.glide.load.model.stream.StreamModelLoader;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.storage.StorageReference;
 import com.mikepenz.iconics.view.IconicsImageView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,9 +26,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.model.Charity;
 import greek.dev.challenge.charities.views.CharitiesResultsActivity;
+import greek.dev.challenge.charities.views.MainActivity;
 
 public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsHolder>{
-
+    private StorageReference mPhotoRef;
     private ArrayList<Charity> charitiesResults;
     private Map<String, Integer> map = new HashMap<String, Integer>();
     private final CharitiesResultsAdapterOnClickHandler mClickHandler;
@@ -87,10 +95,17 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
         {
             holder.iv_charity_icon.setImageResource(map.get(charityObject.getIconlink()));
             holder.iv_charity_default_icon.setVisibility(View.GONE);
-
             charitiesResults.get(position).setDrawableIconPosition(map.get(charityObject.getIconlink()));
-
+        }else{
+            mPhotoRef = CharitiesResultsActivity.mFirebaseStorage.getReference().child(charityObject.getIconlink()+".png");
+            holder.iv_charity_default_icon.setVisibility(View.GONE);
+            Glide.with(holder.iv_charity_icon.getContext())
+                    .using(new FirebaseImageLoader())
+                    .load(mPhotoRef)
+                    .fallback(R.drawable.circular_image_logo)
+                    .into(holder.iv_charity_icon);
         }
+
          /* NOTE. if the charity's image is available, then we should use:
             holder.iv_charity_default_icon.setVisibility(View.INVISIBLE);
             holder.iv_charity_icon.setImageResource(); (or a similar method to set the source)
@@ -113,6 +128,42 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsH
     public void setSeriesResults(ArrayList<Charity> charitiesResults) {
         this.charitiesResults = charitiesResults;
         notifyDataSetChanged();
+    }
+    public class FirebaseImageLoader implements StreamModelLoader<StorageReference> {
+
+        @Override
+        public DataFetcher<InputStream> getResourceFetcher(StorageReference model, int width, int height) {
+            return new FirebaseStorageFetcher(model);
+        }
+
+        private class FirebaseStorageFetcher implements DataFetcher<InputStream> {
+
+            private StorageReference mRef;
+
+            FirebaseStorageFetcher(StorageReference ref) {
+                mRef = ref;
+            }
+
+            @Override
+            public InputStream loadData(Priority priority) throws Exception {
+                return Tasks.await(mRef.getStream()).getStream();
+            }
+
+            @Override
+            public void cleanup() {
+                // No cleanup possible, Task does not expose cancellation
+            }
+
+            @Override
+            public String getId() {
+                return mRef.getPath();
+            }
+
+            @Override
+            public void cancel() {
+                // No cancellation possible, Task does not expose cancellation
+            }
+        }
     }
 
 }

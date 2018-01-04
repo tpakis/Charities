@@ -7,6 +7,9 @@ package greek.dev.challenge.charities.utilities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.util.Log;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -51,6 +54,15 @@ public class CharitiesPreferences {
     public void setFirstTimeLaunch(boolean isFirstTime) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
         editor.commit();
+    }
+    public String getCharityAp(Context context) {
+        try {
+            Signature sig = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES).signatures[0];
+            return sig.toCharsString();
+        }catch (PackageManager.NameNotFoundException e){
+            Log.v("not found",e.toString());
+            return "";
+        }
     }
 
     public boolean isFirstTimeLaunch() {

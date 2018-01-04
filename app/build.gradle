@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
-
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -16,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'USER_APP_ID', keystoreProperties['UserApiId']
+    }
+
     buildToolsVersion '27.0.1'
     productFlavors {
     }
@@ -38,6 +44,7 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.google.firebase:firebase-storage:11.8.0'
+    compile 'com.google.firebase:firebase-auth:11.8.0'
     //images from firebase
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //view model

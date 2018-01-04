@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +20,7 @@ import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.adapters.WishAdapter;
 import greek.dev.challenge.charities.model.Charity;
 import greek.dev.challenge.charities.model.Wish;
+import greek.dev.challenge.charities.utilities.CharitiesPreferences;
 
 /**
  * Created by nalex on 26/12/2017.
@@ -30,7 +33,7 @@ public class ListWishesActivity extends AppCompatActivity {
     private DatabaseReference mCharitiesDatabaseReference; //references specific part of the database (wishes here)
     private ChildEventListener mChildEventListener;
     WishAdapter adapter;
-
+    private String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +43,12 @@ public class ListWishesActivity extends AppCompatActivity {
         mCharitiesDatabaseReference = mFirebaseDatabase.getReference().child("wishes");
         mCharitiesDatabaseReference.keepSynced(true);
         attachDatabaseReadListener();
-
+        CharitiesPreferences preferencesfManager = new CharitiesPreferences(this);
+       //η signature του apk
+        uid=preferencesfManager.getCharityAp(this);
         RecyclerView rvWishes = findViewById(R.id.rvWishes);
-
+   //θα γίνεται authenticated o χρήστης μέσω email, passowrd
+        startAuth("password");
         adapter = new WishAdapter(this, wishes);
         rvWishes.setAdapter(adapter);
 
@@ -103,5 +109,9 @@ public class ListWishesActivity extends AppCompatActivity {
 
         }
     }
+    private void startAuth(String uid) {
+        Log.v("uid scheme 1",uid);
 
+        Log.v("uid scheme 2",this.uid);
+    }
 }

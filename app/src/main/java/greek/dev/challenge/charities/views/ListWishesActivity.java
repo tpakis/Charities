@@ -16,6 +16,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
+import butterknife.BuildConfig;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.adapters.WishAdapter;
 import greek.dev.challenge.charities.model.Charity;
@@ -48,7 +49,7 @@ public class ListWishesActivity extends AppCompatActivity {
         uid=preferencesfManager.getCharityAp(this);
         RecyclerView rvWishes = findViewById(R.id.rvWishes);
    //θα γίνεται authenticated o χρήστης μέσω email, passowrd
-        startAuth("password");
+        startAuth(greek.dev.challenge.charities.BuildConfig.USER_APP_ID);
         adapter = new WishAdapter(this, wishes);
         rvWishes.setAdapter(adapter);
 

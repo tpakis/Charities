@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +29,6 @@ import greek.dev.challenge.charities.utilities.CharitiesPreferences;
  */
 
 public class ListWishesActivity extends AppCompatActivity {
-
     ArrayList<Wish> wishes = new ArrayList<>();
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mCharitiesDatabaseReference; //references specific part of the database (wishes here)
@@ -40,6 +40,11 @@ public class ListWishesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishes);
 
+
+        if (FirebaseApp.getApps(getApplicationContext()).isEmpty()) {
+            FirebaseApp.initializeApp(getApplicationContext());
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        }
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mCharitiesDatabaseReference = mFirebaseDatabase.getReference().child("wishes");
         mCharitiesDatabaseReference.keepSynced(true);
@@ -114,5 +119,21 @@ public class ListWishesActivity extends AppCompatActivity {
         Log.v("uid scheme 1",uid);
 
         Log.v("uid scheme 2",this.uid);
+    }
+    private void detachDatabaseReadListener() {
+        if (mChildEventListener != null) {
+            mCharitiesDatabaseReference.removeEventListener(mChildEventListener);
+            mChildEventListener = null;
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onSignedOutCleanup();
+    }
+    //not signed out now, but a cleanup is required onPause, so not to get duplicate EventListeners
+    private void onSignedOutCleanup(){
+        detachDatabaseReadListener();
+
     }
 }

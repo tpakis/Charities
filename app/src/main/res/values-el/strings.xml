@@ -37,5 +37,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="share_text">Μοιραστείτε την εφαρμογή σε:</string>
+    <string name="txt_send_a_wish">Στείλτε μια ευχή!</string>
+    <string name="txt_wishes">Ευχές</string>
 
 </resources>

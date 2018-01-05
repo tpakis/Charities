@@ -1,5 +1,6 @@
 package greek.dev.challenge.charities.views;
 
+import android.app.Application;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -120,11 +122,16 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
 
         //get reference to specific part of database - messages with mMessagesDatabaseReference
 
-        if (!calledFirebaseAlready)
+        /*if (!calledFirebaseAlready)
         {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             calledFirebaseAlready = true;
+        }*/
+        if (FirebaseApp.getApps(getApplicationContext()).isEmpty()) {
+            FirebaseApp.initializeApp(getApplicationContext());
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         }
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseStorage = FirebaseStorage.getInstance();
 

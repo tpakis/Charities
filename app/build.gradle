@@ -26,7 +26,14 @@ android {
     productFlavors {
     }
 }
+//slideup panel
+dependencies {
+    repositories {
+        mavenCentral()
+    }
+    compile 'com.sothree.slidinguppanel:library:3.4.0'
 
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -59,6 +66,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //slideup panel
     compile 'com.sothree.slidinguppanel:library:3.4.0'
+    //colorful material list
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

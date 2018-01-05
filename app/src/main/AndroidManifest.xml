@@ -18,7 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".views.MainActivity" />
-        <activity android:name=".views.OnboardingActivity" />
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".views.OnboardingActivity" />
         <activity
             android:name=".views.CharitiesResultsActivity"
             android:launchMode="singleTop"
@@ -32,6 +34,7 @@
         </activity>
         <activity
             android:name=".views.ListWishesActivity"
+            android:label="@string/txt_wishes"
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -26,7 +26,14 @@ android {
     productFlavors {
     }
 }
+//slideup panel
+dependencies {
+    repositories {
+        mavenCentral()
+    }
+    compile 'com.sothree.slidinguppanel:library:3.4.0'
 
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'

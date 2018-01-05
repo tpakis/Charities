@@ -18,6 +18,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvWishes"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -31,17 +33,42 @@
         android:clickable="true"
         android:focusable="false"
         android:id="@+id/dragView">
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="@color/primary"-->
+            <!--android:layout_height="1dp">-->
+
+        <!--</View>-->
+        <!--<TextView-->
+            <!--android:id="@+id/drawer_text"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:background="@color/primary"-->
+            <!--android:textSize="@dimen/large_font_size"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:fontFamily="@font/roboto"-->
+            <!--android:text="Στείλτε μια ευχή!"-->
+            <!--android:gravity="center"/>-->
         <TextView
             android:id="@+id/drawer_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
-            android:background="@color/primary"
-            android:textSize="@dimen/large_font_size"
-            android:textColor="#ffffff"
-            android:fontFamily="@font/roboto"
-            android:text="Στείλτε μια ευχή!"
+            android:textColor="@color/primary"
+            android:drawableRight="@drawable/ic_keyboard_arrow_up_24dp"
+            android:text="@string/txt_send_a_wish"
+            android:shadowColor="@color/primary_dark"
+            android:shadowDx="-2.0"
+            android:shadowDy="-2.0"
+            android:shadowRadius="5.0"
             android:gravity="center"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/gray_line"
+            android:layout_height="1dp">
+
+        </View>
             <EditText
                 android:id="@+id/name"
                 android:layout_width="wrap_content"

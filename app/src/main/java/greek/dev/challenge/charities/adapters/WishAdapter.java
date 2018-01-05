@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,8 +69,13 @@ public class WishAdapter extends
         wishTextView.setText(wish.getWish());
 
         TextView authorTextView = holder.authorTextView;
-        authorTextView.setText(wish.getAuthor());
+        ColorGenerator generator = ColorGenerator.MATERIAL;
 
+        int color=generator.getRandomColor();
+        int color2=generator.getRandomColor();
+        authorTextView.setText(wish.getAuthor());
+        authorTextView.setTextColor(color);
+        wishTextView.setBackgroundColor(color);
     }
 
     @Override

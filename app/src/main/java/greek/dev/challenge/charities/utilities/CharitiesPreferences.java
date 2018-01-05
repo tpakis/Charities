@@ -11,7 +11,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("UnusedReturnValue")
@@ -48,6 +50,12 @@ public class CharitiesPreferences {
         Set<String> set = this.reader.getStringSet("donatedIds", new HashSet<String>());
 
         return set.contains(String.valueOf(id));
+    }
+
+    public ArrayList<String> getIds(){
+        Set<String> set = this.reader.getStringSet("donatedIds", new HashSet<String>());
+        ArrayList<String> list = new ArrayList<String>(set);
+         return list;
     }
 
     // Onboarding

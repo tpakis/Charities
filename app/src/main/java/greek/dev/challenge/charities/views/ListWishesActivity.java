@@ -1,13 +1,19 @@
 package greek.dev.challenge.charities.views;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +41,9 @@ public class ListWishesActivity extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     WishAdapter adapter;
     private String uid;
+    private FirebaseAuth mAuth;
+    private static final String TAG = "EmailPassword";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +63,7 @@ public class ListWishesActivity extends AppCompatActivity {
         uid=preferencesfManager.getCharityAp(this);
         RecyclerView rvWishes = findViewById(R.id.rvWishes);
    //θα γίνεται authenticated o χρήστης μέσω email, passowrd
+        mAuth = FirebaseAuth.getInstance();
         startAuth(greek.dev.challenge.charities.BuildConfig.USER_APP_ID);
         adapter = new WishAdapter(this, wishes);
         rvWishes.setAdapter(adapter);
@@ -79,7 +89,34 @@ public class ListWishesActivity extends AppCompatActivity {
         mCharitiesDatabaseReference.push().setValue(wish);
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+     //   updateUI(currentUser);
+    }
+    private void signIn(String email, String password) {
+        Log.d(TAG, "signIn:" + email);
 
+        // [START sign_in_with_email]
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        }
+                    }
+                });
+        // [END sign_in_with_email]
+    }
     private void attachDatabaseReadListener() {
         if (mChildEventListener == null) {
             mChildEventListener = new ChildEventListener() {
@@ -119,6 +156,7 @@ public class ListWishesActivity extends AppCompatActivity {
         Log.v("uid scheme 1",uid);
 
         Log.v("uid scheme 2",this.uid);
+        signIn("test@greekcharities.com","353535");
     }
     private void detachDatabaseReadListener() {
         if (mChildEventListener != null) {

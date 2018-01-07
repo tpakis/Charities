@@ -11,6 +11,8 @@
     <string name="send_Wish_Dialog">Make a donation</string>
     <string name="send_Wish_Dialog_Msg">Please make a donation first, before you can send a wish</string>
     <string name="spinner_wishes_prompt">Select Charity</string>
+    <string name="fill_textview">Please fill the text and wish fields!</string>
+    <string name="wish_sent">Your Wish was added succesfully!</string>
     <!-- Charity Detail XML -->
     <string name="sms">&#xf003; Send an SMS</string>
     <string name="call">&#xf095; Make a Call</string>

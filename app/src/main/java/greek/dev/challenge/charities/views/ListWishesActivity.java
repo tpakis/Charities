@@ -90,6 +90,13 @@ public class ListWishesActivity extends AppCompatActivity {
 
     @BindString(R.string.send_Wish_Dialog_Msg)
     public String sendWishDialogMsg;
+
+    @BindString(R.string.fill_textview)
+    public String fillTextView;
+
+    @BindString(R.string.wish_sent)
+    public String wishSent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,7 +169,7 @@ public class ListWishesActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(author) && !TextUtils.isEmpty(wish)) {
             if (canSendWish()) {
                 addWishToCloud(wish, author,preferencesfManager.getIdOfName(spinner.getSelectedItem().toString()));
-                Toast.makeText(this,"Η ευχή προστέθηκε επιτυχώς!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,wishSent,Toast.LENGTH_SHORT).show();
                 View view = this.getCurrentFocus();
                 if (view != null) {
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -174,7 +181,7 @@ public class ListWishesActivity extends AppCompatActivity {
             }
 
         }else{
-            Toast.makeText(this,"Συμπληρώστε το πεδίο του ονόματος και το μήνυμα σας!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,fillTextView,Toast.LENGTH_SHORT).show();
         }
     }
 

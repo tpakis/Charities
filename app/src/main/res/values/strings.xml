@@ -7,8 +7,12 @@
     <string name="add_institute">Add Charity</string>
     <string name="share_text">Share the app at:</string>
     <string name="google_play_prefix" translatable="false">https://play.google.com/store/apps/details?id=</string>
-
-
+    <!--List Wishes XML -->
+    <string name="send_Wish_Dialog">Make a donation</string>
+    <string name="send_Wish_Dialog_Msg">Please make a donation first, before you can send a wish</string>
+    <string name="spinner_wishes_prompt">Select Charity</string>
+    <string name="fill_textview">Please fill the text and wish fields!</string>
+    <string name="wish_sent">Your Wish was added succesfully!</string>
     <!-- Charity Detail XML -->
     <string name="sms">&#xf003; Send an SMS</string>
     <string name="call">&#xf095; Make a Call</string>

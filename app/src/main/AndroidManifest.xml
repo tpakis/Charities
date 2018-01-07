@@ -35,6 +35,7 @@
         <activity
             android:name=".views.ListWishesActivity"
             android:label="@string/txt_wishes"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".views.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

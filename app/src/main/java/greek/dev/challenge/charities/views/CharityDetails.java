@@ -55,7 +55,7 @@ public class CharityDetails extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == REQUEST_CODE){
-            charitiesPreferences.saveId(selectedCharity.getId());
+            charitiesPreferences.saveCharity(selectedCharity.getName(),selectedCharity.getId());
         }
     }
 

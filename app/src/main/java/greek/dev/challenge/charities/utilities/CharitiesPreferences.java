@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Log;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,14 +31,44 @@ public class CharitiesPreferences {
         this.reader = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         this.editor = this.reader.edit();
     }
+    public boolean saveCharity(String name,int id){
+        saveId(id);
+        saveName(name,id);
+        return true;
+    }
 
-    public boolean saveId(int id){
-        if(!isIdExists(id)) {
+    public boolean saveId(int id) {
+        if (!isIdExists(id)) {
             Set<String> set = this.reader.getStringSet("donatedIds", new HashSet<String>());
 
             set.add(String.valueOf(id));
 
             this.editor.putStringSet("donatedIds", set);
+            this.editor.putInt(String.valueOf(id), 1);
+            this.editor.apply();
+
+            return true;
+        } else {
+            int donationsNumber = 0;
+            try {
+                this.reader.getInt(String.valueOf(id), donationsNumber);
+                this.editor.putInt(String.valueOf(id), donationsNumber + 1);
+                this.editor.apply();
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+
+        }
+    }
+    public boolean saveName(String name,int id){
+        if(!isNameExists(name)) {
+            Set<String> set = this.reader.getStringSet("donatedNames", new HashSet<String>());
+
+            set.add(name);
+
+            this.editor.putStringSet("donatedNames", set);
+            this.editor.putInt(name,id);
             this.editor.apply();
 
             return true;
@@ -45,17 +76,31 @@ public class CharitiesPreferences {
 
         return false;
     }
+    public boolean isNameExists(String name){
+        Set<String> set = this.reader.getStringSet("donatedNames", new HashSet<String>());
+
+        return set.contains(name);
+    }
 
     public boolean isIdExists(int id){
         Set<String> set = this.reader.getStringSet("donatedIds", new HashSet<String>());
 
         return set.contains(String.valueOf(id));
     }
-
+    public int getIdOfName(String name){
+        int id = -1;
+        this.reader.getInt(name,id);
+        return id;
+    }
     public ArrayList<String> getIds(){
         Set<String> set = this.reader.getStringSet("donatedIds", new HashSet<String>());
         ArrayList<String> list = new ArrayList<String>(set);
          return list;
+    }
+    public ArrayList<String> getNames(){
+        Set<String> set = this.reader.getStringSet("donatedNames", new HashSet<String>());
+        ArrayList<String> list = new ArrayList<String>(set);
+        return list;
     }
 
     // Onboarding

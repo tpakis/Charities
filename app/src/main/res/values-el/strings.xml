@@ -4,7 +4,10 @@
     <string name="no">Όχι</string>
     <string name="add_institute">Προσθήκη Ιδρύματος</string>
     <string name="error">Υπήρξε κάποιο σφάλμα! Παρακαλώ ξαναπροσπαθήστε!</string>
-
+    <!--List Wishes XML -->
+    <string name="send_Wish_Dialog">Κάντε μία δωρεά</string>
+    <string name="send_Wish_Dialog_Msg">Κάντε μία δωρεά πριν στείλετε την πρώτη σας ευχή!</string>
+    <string name="spinner_wishes_prompt">Διαλέξτε ίδρυμα</string>
     <!-- Charity Detail XML -->
     <string name="sms">&#xf003; Στείλτε ένα SMS</string>
     <string name="call">&#xf095; Καλέστε</string>

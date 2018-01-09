@@ -24,7 +24,7 @@
 ( τα ονόματα είναι με τυχαία σειρά ) :
 * <a href="https://github.com/georgekouk27">@georkouk</a>
 * <a href="https://github.com/tpakis">@ThanosTs</a>
-* <a href="">@Noni</a>
+* <a href="https://github.com/methadoni">@Noni</a>
 * <a href="https://github.com/andreasagap">@andreasagap</a> 
 * <a href="https://github.com/NasiaKouts">@Nasia Kouts </a> 
 * <a href="https://github.com/EiriniMits">@Eirini M </a> 

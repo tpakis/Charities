@@ -34,21 +34,6 @@ public class WishAdapter extends
         return mContext;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView wishTextView;
-        public TextView authorTextView;
-
-        public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
-            super(itemView);
-
-            wishTextView = (TextView) itemView.findViewById(R.id.wish_item_view);
-            authorTextView = (TextView) itemView.findViewById(R.id.author_item_view);
-        }
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
@@ -73,7 +58,7 @@ public class WishAdapter extends
 
         int color=generator.getRandomColor();
         int color2=generator.getRandomColor();
-        authorTextView.setText(wish.getAuthor());
+        authorTextView.setText("\uf2be "+wish.getAuthor()+ "\n" + "\uf004 "+ wish.getCharityName());
         authorTextView.setTextColor(color);
         wishTextView.setBackgroundColor(color);
     }
@@ -81,6 +66,21 @@ public class WishAdapter extends
     @Override
     public int getItemCount() {
         return mWishes.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView wishTextView;
+        public TextView authorTextView;
+
+        public ViewHolder(View itemView) {
+            // Stores the itemView in a public final member variable that can be used
+            // to access the context from any ViewHolder instance.
+            super(itemView);
+
+            wishTextView = (TextView) itemView.findViewById(R.id.wish_item_view);
+            authorTextView = (TextView) itemView.findViewById(R.id.author_item_view);
+        }
     }
 
 

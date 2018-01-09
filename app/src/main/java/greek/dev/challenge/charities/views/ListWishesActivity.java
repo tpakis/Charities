@@ -3,7 +3,6 @@ package greek.dev.challenge.charities.views;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -12,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -36,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +45,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.adapters.WishAdapter;
-import greek.dev.challenge.charities.model.Charity;
 import greek.dev.challenge.charities.model.Wish;
 import greek.dev.challenge.charities.utilities.CharitiesPreferences;
 
@@ -111,12 +109,10 @@ public class ListWishesActivity extends AppCompatActivity {
         mCharitiesDatabaseReference = mFirebaseDatabase.getReference().child("wishes");
         mCharitiesDatabaseReference.keepSynced(true);
         attachDatabaseReadListener();
-         preferencesfManager = new CharitiesPreferences(this);
-         Log.v("ids list",preferencesfManager.getIds().toString());
-       //η signature του apk
-        uid=preferencesfManager.getCharityAp(this);
+        preferencesfManager = new CharitiesPreferences(this);
+        Log.v("ids list", preferencesfManager.getIds().toString());
+        uid = preferencesfManager.getCharityAp(this);
         RecyclerView rvWishes = findViewById(R.id.rvWishes);
-   //θα γίνεται authenticated o χρήστης μέσω email, passowrd
         mAuth = FirebaseAuth.getInstance();
         startAuth(greek.dev.challenge.charities.BuildConfig.USER_APP_ID);
         adapter = new WishAdapter(this, wishes);
@@ -131,11 +127,11 @@ public class ListWishesActivity extends AppCompatActivity {
 
             @Override
             public void onPanelStateChanged(View panel, PanelState previousState, PanelState newState) {
-               // if (newState == PanelState.COLLAPSED){
+                // if (newState == PanelState.COLLAPSED){
                 //    float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-                 //   int dp = Math.round(pixels);
-                  //  mLayout.setPanelHeight(dp);
-               // }
+                //   int dp = Math.round(pixels);
+                //  mLayout.setPanelHeight(dp);
+                // }
                 Log.i(TAG, "onPanelStateChanged " + newState);
 
             }
@@ -145,19 +141,13 @@ public class ListWishesActivity extends AppCompatActivity {
 
         rvWishes.setLayoutManager(gridLayoutManager);
 
-        //adding wishes to cloud
-     //   addWishToCloud("Ευτυχισμένο το 2018!", "Μαρία", 2);
-      //  addWishToCloud("Καλά χριστούγεννα σε όλους!", "Γιώργος", 5);
-       // addWishToCloud("Τα χριστούγεννα πέρασαν!!!!", "Νίκος", 3);
-       // addWishToCloud("Πρέπει να ποστάρουμε την εφαρμογή ΓΡΗΓΟΡΑΑΑΑΑ", "Θάνος", 2);
-
-
     }
 
-    private void setSpinnerList(){
-       ArrayList<String> namesList = preferencesfManager.getNames();
-           ArrayAdapter<String> adapter =
-                   new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, namesList);
+    private void setSpinnerList() {
+        ArrayList<String> namesList = preferencesfManager.getNames();
+        namesList.add(0, "Διαλέξτε οργανισμό:");
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, namesList);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
@@ -166,31 +156,31 @@ public class ListWishesActivity extends AppCompatActivity {
     public void sendClick(View v) {
         String author = authorOfWish.getText().toString();
         String wish = wishText.getText().toString();
-        if (!TextUtils.isEmpty(author) && !TextUtils.isEmpty(wish)) {
-            if (canSendWish()) {
-                addWishToCloud(wish, author,preferencesfManager.getIdOfName(spinner.getSelectedItem().toString()));
-                Toast.makeText(this,wishSent,Toast.LENGTH_SHORT).show();
+        if (canSendWish()) {
+            if (!TextUtils.isEmpty(author) && !TextUtils.isEmpty(wish) && !(spinner.getSelectedItemPosition() == 0)) {
+                addWishToCloud(wish, author, spinner.getSelectedItem().toString());
+                Toast.makeText(this, wishSent, Toast.LENGTH_SHORT).show();
                 View view = this.getCurrentFocus();
                 if (view != null) {
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
                 mLayout.setPanelState(PanelState.COLLAPSED);
-            }else{
-                showAlertToMakeWish();
-            }
+            } else {
+                Toast.makeText(this, fillTextView, Toast.LENGTH_SHORT).show();
 
-        }else{
-            Toast.makeText(this,fillTextView,Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            showAlertToMakeWish();
         }
     }
 
-    private boolean canSendWish(){
+    private boolean canSendWish() {
         List<String> tmpList = preferencesfManager.getIds();
         return (!tmpList.isEmpty());
     }
 
-    private void showAlertToMakeWish(){
+    private void showAlertToMakeWish() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ListWishesActivity.this);
         builder.setTitle(sendWishDialog);
         builder.setMessage(sendWishDialogMsg);
@@ -198,7 +188,7 @@ public class ListWishesActivity extends AppCompatActivity {
         builder.setPositiveButton(yesString, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent i = new Intent(ListWishesActivity.this,CharitiesResultsActivity.class);
+                Intent i = new Intent(ListWishesActivity.this, CharitiesResultsActivity.class);
                 startActivity(i);
                 dialog.dismiss();
                 finish();
@@ -215,24 +205,23 @@ public class ListWishesActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void addWishToCloud(String wishText, String author, int charityId) {
+    private void addWishToCloud(String wishText, String author, String charityName) {
         //An if statement here is needed to check if the user has made a charity to this charity id
         //Also we could check for valid size of our list and valid id
-        Wish wish = new Wish(wishText, author, charityId, System.currentTimeMillis() );
+        Wish wish = new Wish(wishText, author, charityName, System.currentTimeMillis());
         mCharitiesDatabaseReference.push().setValue(wish);
 
     }
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-     //   updateUI(currentUser);
     }
+
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
-
-        // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -248,8 +237,8 @@ public class ListWishesActivity extends AppCompatActivity {
                         }
                     }
                 });
-        // [END sign_in_with_email]
     }
+
     private void attachDatabaseReadListener() {
         if (mChildEventListener == null) {
             mChildEventListener = new ChildEventListener() {
@@ -257,7 +246,7 @@ public class ListWishesActivity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     //results from database are deserialized
                     Wish wish = dataSnapshot.getValue(Wish.class);
-                    wishes.add(0,wish);
+                    wishes.add(0, wish);
                     adapter.notifyDataSetChanged();
                 }
 
@@ -285,25 +274,30 @@ public class ListWishesActivity extends AppCompatActivity {
 
         }
     }
-    private void startAuth(String uid) {
-        Log.v("uid scheme 1",uid);
 
-        Log.v("uid scheme 2",this.uid);
-        signIn("test@greekcharities.com","353535");
+    private void startAuth(String uid) {
+        //Τα log πρέπει να φύγουν και να γίνει uncomment η γραμμή singin με το test 2 και comment
+        //με το test, πριν δημοσιευθεί το signedapk
+        //    signIn("test2@greekcharities.com",this.uid);
+        signIn("test@greekcharities.com", "353535");
+
     }
+
     private void detachDatabaseReadListener() {
         if (mChildEventListener != null) {
             mCharitiesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         onSignedOutCleanup();
     }
+
     //not signed out now, but a cleanup is required onPause, so not to get duplicate EventListeners
-    private void onSignedOutCleanup(){
+    private void onSignedOutCleanup() {
         detachDatabaseReadListener();
 
     }

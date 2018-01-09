@@ -8,7 +8,7 @@
     <string name="send_Wish_Dialog">Κάντε μία δωρεά</string>
     <string name="send_Wish_Dialog_Msg">Κάντε μία δωρεά πριν στείλετε την πρώτη σας ευχή!</string>
     <string name="spinner_wishes_prompt">Διαλέξτε ίδρυμα</string>
-    <string name="fill_textview">"Συμπληρώστε το πεδίο του ονόματος και το μήνυμα σας!"</string>
+    <string name="fill_textview">"Συμπληρώστε το πεδίο του ονόματος,το μήνυμα σας και επιλέξτε τον οργανισμό που στέλνετε την ευχή!"</string>
     <string name="wish_sent">Η ευχή σας προστέθηκε επιτυχώς!</string>
     <!-- Charity Detail XML -->
     <string name="sms">&#xf003; Στείλτε ένα SMS</string>
@@ -44,5 +44,7 @@
     <string name="share_text">Μοιραστείτε την εφαρμογή σε:</string>
     <string name="txt_send_a_wish">Στείλτε μια ευχή!</string>
     <string name="txt_wishes">Ευχές</string>
+    <string name="title_activity_info">Πληροφορίες</string>
+    <string name="action_settings">Ρυθμίσεις</string>
 
 </resources>

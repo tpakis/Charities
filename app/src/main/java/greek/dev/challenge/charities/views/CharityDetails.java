@@ -1,14 +1,16 @@
 package greek.dev.challenge.charities.views;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.mikepenz.iconics.view.IconicsImageView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -121,24 +123,6 @@ public class CharityDetails extends AppCompatActivity {
                 }else{
                     tv_call_cost.setText(selectedCharity.getTelephonecost());
                 }
-
-        // ------------------------------------------------
-
-        //same idea like in adapter
-
-                 /* NOTE. if the charity's image is available, then we should use:
-            holder.iv_charity_default_icon.setVisibility(View.INVISIBLE);
-            holder.iv_charity_icon.setImageResource(); (or a similar method to set the source)
-            but if the charity's image in not available, then we should use:
-            holder.iv_charity_default_icon.setVisibility(View.VISIBLE);
-            holder.iv_charity_icon.setImageResource(R.drawable.no_charity_icon_bg);  */
-
-        // has to be implemented the getIconlink provides link not image
-        // holder.iv_charity_icon.setImageResource(charityObject.getIconLink());
-        // The user can't send data to the firebase db yet, so it can't be implemented
-        // holder.rb_rating.setNumStars(sampleDataObject.getStars());
-
-
     }
 
 }

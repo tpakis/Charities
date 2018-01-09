@@ -11,7 +11,7 @@
     <string name="send_Wish_Dialog">Make a donation</string>
     <string name="send_Wish_Dialog_Msg">Please make a donation first, before you can send a wish</string>
     <string name="spinner_wishes_prompt">Select Charity</string>
-    <string name="fill_textview">Please fill the text and wish fields!</string>
+    <string name="fill_textview">Please fill the name, wish fields and select an organization!</string>
     <string name="wish_sent">Your Wish was added succesfully!</string>
     <!-- Charity Detail XML -->
     <string name="sms">&#xf003; Send an SMS</string>
@@ -44,26 +44,27 @@
     <string name="home">Κεντρική Σελίδα</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_info">Πληροφορίες</string>
-    <string name="large_text">
-        "Charities Android App by GreekCommunity \n\n"
+    <string name="title_activity_info">Information</string>
+    <string name="large_text" translatable="false">
+        "Προσφέρω! by Greek udacity Android scholarship community \n\n"
 
-        "H Charities είναι  μια ομαδική δουλειά από την ελληνική κοινότητα κατά "
-        "την διάρκεια του προγράμματος …της Google.\n\n"
+        "Η εφαρμογή «Προσφέρω!» δημιουργήθηκε για να διευκολύνει την προσφορά σε φιλανθρωπικούς και φιλοζωικούς οργανισμούς και μη κυβερνητικές οργανώσεις. \n\n"
 
-        "Ο Σκοπός δημιουργίας αυτής της εφαρμογής είναι πέρα από τα μαθήματα να μπορούν να "
-        "συνεργαστούμε και σε ένα μεγαλύτερο και πιο ολοκληρωμένο project. \n\n"
+        "Η εφαρμογή περιέχει πληροφορίες για τον κάθε οργανισμό και με ένα απλό κλικ μπορείτε κι εσείς να κάνετε μία μικρή δωρεά με μία κλήση ή ένα sms! \n\n"
 
-        "Mέσα από την εφαρμογή μας μπορείτε να κάνετε μια δωρεά μέσα σε πολύ λίγο χρόνο!\n\n"
+        "Προσφέρετε κι εσείς μία μικρή βοήθεια στον σκοπό που θέλετε να στηρίξετε και αφήστε μια ευχή στον τοίχο της εφαρμογής για να την διαβάσουν όλοι οι χρήστες! \n\n"
 
-        "Διαλέξτε τον οργανισμό/ίδρυμα που θέλετε να συνεισφέρετε!\n\n"
-        "Διαλέξτε τον τρόπο!\n\n "
+        "Ξέρετε κάποιον ακόμη οργανισμό που παρέχει δυνατότητα δωρεάς μέσω κλήσης ή sms και δεν περιλαμβάνεται στη λίστα; Μπορείτε εύκολα να τον προσθέσετε μέσα από την εφαρμογή! \n\n"
 
-        "(SMS ή Τηλεφωνική Τηλεφωνική κλήση)\n\n "
-        "Μη ξεχάσετε να στείλετε τις ευχές σας!\n\n"
+        "Σημαντική παρατήρηση: Η εφαρμογή δεν αποθηκεύει κανένα προσωπικό δεδομένο των χρηστών ούτε τοπικά ούτε στο cloud, ούτε αποθηκεύει τις δωρεές. \n\n"
 
+        "Ιστορία πίσω από την εφαρμογή: \n\n"
 
+        "Η εφαρμογή «Προσφέρω!» δημιουργήθηκε από την Ελληνική κοινότητα υπότροφων «Google Challenge Scholarship for Android Developing» στην πλατφόρμα Udacity. \n\n"
 
+        "Μια ομάδα 12 συμμετεχόντων σπουδαστών – προγραμματιστών θέλοντας να εξασκηθεί στα πλαίσια των μαθημάτων, αποφάσισε να δημιουργήσει αυτή την εφαρμογή ώστε ταυτόχρονα με την εκμάθηση να προσφέρει στην κοινωνία. \n\n"
+
+        "Η εφαρμογή δημιουργήθηκε καθαρά για διδακτικούς σκοπούς και δεν έχει κανένα οικονομικό όφελος – κίνητρο από την λειτουργία της ούτε και σχετίζεται με κανέναν από τους οργανισμούς που φιλοξενούνται. \n\n"
     </string>
     <string name="action_settings">Settings</string>
     <string name="txt_send_a_wish">ΣΤΕΙΛΤΕ ΜΙΑ ΕΥΧΗ</string>

@@ -81,7 +81,6 @@
                 android:paddingLeft="10dp"/>
             <Spinner
                 android:id="@+id/charities_spinner"
-                android:autofillHints="Σε ποιό ίδρυμα θέλετε να στείλετε"
                 android:layout_width="match_parent"
                 android:layout_above="@id/wish_and_send_layout"
                 android:layout_margin="@dimen/small_margin"

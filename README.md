@@ -32,6 +32,6 @@
 * <a href="https://github.com/anagnostou74">@Kostas Anagnostou</a>
 * <a href="https://github.com/PanosGr94">@Panos Gr </a>
 * <a href="https://github.com/MeTaXaS4">@gmetax </a>
-* <a href="">@Thanos Bilalis </a>
+* <a href="https://github.com/thanosbil">@Thanos Bilalis </a>
 * <a href="https://github.com/terpal">@Nikos Vasileiadis </a>
 * <a href="https://github.com/nal3x">@NikosA </a>

@@ -1,31 +1,29 @@
 package greek.dev.challenge.charities.views;
 
-import android.app.Application;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
@@ -38,7 +36,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindString;
@@ -51,24 +48,20 @@ import greek.dev.challenge.charities.model.Charity;
 public class CharitiesResultsActivity extends AppCompatActivity implements ResultsAdapter.CharitiesResultsAdapterOnClickHandler, NavigationView.OnNavigationItemSelectedListener {
 
 
+    public static FirebaseStorage mFirebaseStorage;
+    static boolean calledFirebaseAlready = false;
     @BindView(R.id.rv_results)
     public RecyclerView rv_charities;
-
     @BindView(R.id.tv_error_message)
     public TextView tv_error_message;
-
     @BindView(R.id.pb_loading_indicator)
     public ProgressBar pb_loading_indicator;
-
     @BindView(R.id.todo_list_empty_view)
     public LinearLayout emptyView;
-
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
-
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawer;
-
     @BindView(R.id.nav_view)
     public NavigationView navigationView;
     @BindString(R.string.add_institute)
@@ -81,17 +74,34 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
     public String googleFormLink;
     @BindString(R.string.open_dialog)
     public String openDialog;
-
     private ResultsAdapter mCharitiesAdapter;
-
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mCharitiesDatabaseReference; //references specific part of the database (charities here)
     private ChildEventListener mChildEventListener;
-    public static FirebaseStorage mFirebaseStorage;
     private StorageReference mCharitiesPhotosStorageReference;
     private MainViewModel viewModel;
 
-    static boolean calledFirebaseAlready = false;
+    public static Map getDrawablesMap() {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("actionaid", R.drawable.actionaid);
+        map.put("antikarkiniki", R.drawable.antikarkiniki);
+        map.put("anima", R.drawable.anima);
+        map.put("edke", R.drawable.edke);
+        map.put("elepap", R.drawable.elepap);
+        map.put("elpida", R.drawable.elpida);
+        map.put("grammis_sos", R.drawable.grammis_sos);
+        map.put("i_pisti", R.drawable.i_pisti);
+        map.put("iagkalia", R.drawable.iagkalia);
+
+        map.put("kibotos", R.drawable.kibotos);
+        map.put("makeawish", R.drawable.makeawish);
+        map.put("theofilos", R.drawable.theofilos);
+        map.put("unicef", R.drawable.unicef);
+        map.put("xamogelo_paidiou", R.drawable.xamogelo_paidiou);
+        map.put("xwria_sos", R.drawable.xwria_sos);
+        return map;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +114,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-    //    NavigationView navigationView = findViewById(R.id.nav_view);
+        //    NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         LinearLayoutManager layoutManager
@@ -122,11 +132,6 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
 
         //get reference to specific part of database - messages with mMessagesDatabaseReference
 
-        /*if (!calledFirebaseAlready)
-        {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            calledFirebaseAlready = true;
-        }*/
         if (FirebaseApp.getApps(getApplicationContext()).isEmpty()) {
             FirebaseApp.initializeApp(getApplicationContext());
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -137,7 +142,6 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
 
         mCharitiesDatabaseReference = mFirebaseDatabase.getReference().child("charities");
         mCharitiesDatabaseReference.keepSynced(true);
-        // mCharitiesPhotosStorageReference = mFirebaseStorage.getReference().child("charities_photos");
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
@@ -146,33 +150,20 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
             public void onChanged(@Nullable ArrayList<Charity> charitiesList) {
                 emptyView.setVisibility(View.GONE);
                 mCharitiesAdapter.setSeriesResults(charitiesList);
-                Log.v("main", charitiesList.get(charitiesList.size()-1).toString());
-                Log.v("main", String.valueOf(charitiesList.size()));
                 runLayoutAnimation(rv_charities);
             }
         });
-
-
-     /*   // TODO THE CODE BELLOW IS FOR TESTING. has to be removed to implement it using the real data.
-        // --------------------------------------------------------
-        Charity test1 = new Charity(1, "Charity Name 1", "lalala1", "5", "test", "test", "10", "10", "lala", "test");
-        Charity test2 = new Charity(2, "Charity Name 2", "lalala2", "6", "test2", "test2", "102", "102", "lal2a", "test2");
-
-        ArrayList<Charity> testing = new ArrayList<Charity>();
-        testing.add(test1);
-        testing.add(test2);
-        // ----------------------------------------------------------
-*/
-
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         // an exei ksanakatevasei ta dedomena den xreiazetai na ta ksanatraviksoume
-        if (!viewModel.fetched){
+        if (!viewModel.fetched) {
             attachDatabaseReadListener();
         }
     }
+
     private void attachDatabaseReadListener() {
         if (mChildEventListener == null) {
             mChildEventListener = new ChildEventListener() {
@@ -208,19 +199,22 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
 
         }
     }
+
     private void detachDatabaseReadListener() {
         if (mChildEventListener != null) {
             mCharitiesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         onSignedOutCleanup();
     }
+
     //not signed out now, but a cleanup is required onPause, so not to get duplicate EventListeners
-    private void onSignedOutCleanup(){
+    private void onSignedOutCleanup() {
         detachDatabaseReadListener();
 
     }
@@ -239,10 +233,11 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
     public void onClick(Charity selectedCharity) {
         Context context = this;
         Intent intent = new Intent(context, CharityDetails.class);
-        intent.putExtra("charity",selectedCharity);
+        intent.putExtra("charity", selectedCharity);
         //intent.putExtra(Intent.EXTRA_TEXT, ""+selectedCharity.getId());
         startActivity(intent);
     }
+
     // Animation RecyclerView
     private void runLayoutAnimation(final RecyclerView recyclerView) {
         final Context context = recyclerView.getContext();
@@ -253,26 +248,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scheduleLayoutAnimation();
     }
-    public static Map getDrawablesMap(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("actionaid", R.drawable.actionaid);
-        map.put("antikarkiniki", R.drawable.antikarkiniki);
-        map.put("anima", R.drawable.anima);
-        map.put("edke", R.drawable.edke);
-        map.put("elepap", R.drawable.elepap);
-        map.put("elpida", R.drawable.elpida);
-        map.put("grammis_sos", R.drawable.grammis_sos);
-        map.put("i_pisti", R.drawable.i_pisti);
-        map.put("iagkalia", R.drawable.iagkalia);
 
-        map.put("kibotos", R.drawable.kibotos);
-        map.put("makeawish", R.drawable.makeawish);
-        map.put("theofilos", R.drawable.theofilos);
-        map.put("unicef", R.drawable.unicef);
-        map.put("xamogelo_paidiou", R.drawable.xamogelo_paidiou);
-        map.put("xwria_sos", R.drawable.xwria_sos);
-        return map;
-    }
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -285,7 +261,7 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
             Intent i = new Intent(CharitiesResultsActivity.this, ListWishesActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_info) {
-            Intent i = new Intent(CharitiesResultsActivity.this, MainActivity.class);
+            Intent i = new Intent(CharitiesResultsActivity.this, InfoActivity.class);
             startActivity(i);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -303,7 +279,8 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
             goToMain();
         }
     }
-    private void openGoogleform(){
+
+    private void openGoogleform() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CharitiesResultsActivity.this);
         builder.setTitle(addInstitute);
         builder.setMessage(openDialog);
@@ -329,9 +306,10 @@ public class CharitiesResultsActivity extends AppCompatActivity implements Resul
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-    private void goToMain(){
+
+    private void goToMain() {
         Intent i = new Intent(CharitiesResultsActivity.this, MainActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(i);
     }
 }

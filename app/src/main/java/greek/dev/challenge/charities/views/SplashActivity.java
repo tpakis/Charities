@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import greek.dev.challenge.charities.R;
 import greek.dev.challenge.charities.utilities.CharitiesPreferences;
 
 public class SplashActivity extends AppCompatActivity {
